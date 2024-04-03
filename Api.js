@@ -3,18 +3,23 @@ const app = express();
 const bodyP = require("body-parser");
 const compiler = require("compilex");
 const options = { stats: true };
+
 compiler.init(options);
+
 app.use(bodyP.json());
+
 app.use(
   "/codemirror-5.65.16",
   express.static("C:/Noman/code/github/CodeEditor/codemirror-5.65.16")
 );
+
 app.get("/", function (req, res) {
   compiler.flush(function () {
     console.log("deleted");
   });
   res.sendFile("C:/Noman/code/github/CodeEditor/index.html");
 });
+
 app.post("/compile", function (req, res) {
   var code = req.body.code;
   var input = req.body.input;
