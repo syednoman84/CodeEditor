@@ -1,0 +1,14 @@
+[
+  {
+    "question": "Inside which HTML element do we put the JavaScript??",
+    "template": "test template 1"
+  },
+  {
+    "question": "What is javascript",
+    "template": "test template 2"
+  },
+  {
+    "question": "What is json",
+    "template": "test template 3"
+  }
+]
