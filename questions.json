@@ -5,7 +5,7 @@
     "expectedOutput": "[1, 2, 3, 4, 5] has Data Type: Integer[]"
   },
   {
-    "question": "Return the sum of all values using streams.",
+    "question": "Return the sum of all values in the given array using streams.",
     "input": "int[] array = {1, 2, 3, 4, 5};",
     "expectedOutput": "15"
   },

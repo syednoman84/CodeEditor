@@ -36,27 +36,28 @@
                     </select>
                 </div>
                 <div>
-                    <button type="button" id="btnFetch" class="btn btn-success">Fetch</button>
-                    <button type="button" id="run" class="btn btn-success"><i class="bi bi-play-fill"></i></button>
+                    <button type="button" id="btnFetch" class="btn btn-success">Fetch Question</button>
+                    <button type="button" id="run" class="btn btn-success">Submit Code</button>
                 </div>
             </div>
             <div class="d-flex justify-content-between mb-2 bg-dark rounded p-2">
-                <p style="color:aliceblue" id="qText">Question will appear here after you click the Fetch button...</p>
+                <p style="color:aliceblue" id="qText">Please click the Fetch Question button to load a new question</p>
             </div>
-            <textarea type="text" id="editor" class="form-control" aria-label="First name">sample</textarea>
+            <textarea type="text" id="editor" class="form-control" aria-label="First name"></textarea>
         </div>
         <div class="col d-flex flex-column rounded bg-dark px-4">
             <div class="h-50">
                 <label for="Input" class="text-light mt-4 mb-2">Expected Output</label>
                 <textarea type="text" id="input" class="form-control h-75" aria-label="Last name"></textarea>
             </div>
-            <div class="h-50">
+            <div class="h-75">
                 <label for="Output" class="text-light mb-2">Actual Output</label>
-                <textarea type="text" id="output" class="form-control h-75" aria-label="Last name"></textarea>
+                <textarea type="text" id="output" class="form-control h-75 mb-3" aria-label="Last name"></textarea>
+                <div id="resultDiv" style="text-align: center; color: white"><h2 id="result">....</h2></div>
             </div>
         </div>
     </div>
-    <div id="resultDiv" style="margin-left: 30px; margin-right: 15px;"><h2 id="result">....</h2></div>
+    <!-- <div id="resultDiv" style="margin-left: 30px; margin-right: 15px;"><h2 id="result">....</h2></div> -->
 </body>
 <script>
 var editorTemplateStart = 
@@ -73,7 +74,6 @@ var editorTemplateEnd = `
     }
 }`;
 
-    var expectedResult = '[Viktor, Farcic, John, Doe, Third]';
     var btnFetch = document.getElementById("btnFetch")
     var qText = document.getElementById("qText")
     var editorText = document.getElementById("editor")
@@ -101,9 +101,17 @@ var editorTemplateEnd = `
         var qData = await fetch("http://localhost:8000/questions")
         question = await qData.json()
 
+        // check to avoid repeated question
+        if(qText.innerHTML == question.question){
+            qData = await fetch("http://localhost:8000/questions")
+            question = await qData.json()
+        }
+
         qText.innerHTML = question.question;
         editor.getDoc().setValue(editorTemplateStart + "\t" + question.input + editorTemplateEnd);
         expectedOutput.value = question.expectedOutput;
+        output.value = "";
+
     })
 
     // Run Button Click Event listener 
