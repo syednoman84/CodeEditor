@@ -14,9 +14,9 @@ app.use(
 );
 
 app.get("/", function (req, res) {
-  compiler.flush(function () {
-    console.log("deleted");
-  });
+  // compiler.flush(function () {
+  //   console.log("deleted");
+  // });
   res.sendFile("C:/Noman/code/github/CodeEditor/index.html");
 });
 
@@ -96,7 +96,6 @@ app.post("/compile", function (req, res) {
         var envData = { OS: "windows" };
         compiler.compileJava(envData, code, function (data) {
           if (data.output) {
-            console.log(data);
             res.send(data);
           } else {
             res.send({ output: "error" });
@@ -108,7 +107,6 @@ app.post("/compile", function (req, res) {
         //else
         compiler.compileJavaWithInput(envData, code, input, function (data) {
           if (data.output) {
-            console.log(data);
             res.send(data);
           } else {
             res.send({ output: "error" });

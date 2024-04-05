@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Code Yourself</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
@@ -47,23 +47,45 @@
         </div>
         <div class="col d-flex flex-column rounded bg-dark px-4">
             <div class="h-50">
-                <label for="Input" class="text-light mt-4 mb-2">Input</label>
-                <textarea type="text" id="input" class="form-control h-75" aria-label="Last name">{false=[tigers], true=[lions, bears]} has Data Type: Partition</textarea>
+                <label for="Input" class="text-light mt-4 mb-2">Expected Output</label>
+                <textarea type="text" id="input" class="form-control h-75" aria-label="Last name"></textarea>
             </div>
             <div class="h-50">
-                <label for="Output" class="text-light mb-2">Output</label>
+                <label for="Output" class="text-light mb-2">Actual Output</label>
                 <textarea type="text" id="output" class="form-control h-75" aria-label="Last name"></textarea>
             </div>
         </div>
     </div>
-    <div><h2 id="result">....</h2></div>
+    <div id="resultDiv" style="margin-left: 30px; margin-right: 15px;"><h2 id="result">....</h2></div>
 </body>
 <script>
+var editorTemplateStart = 
+`import java.util.*;
+import java.util.stream.Collectors;
+import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
+
+public class Main {
+    public static void main(String[] args) {    
+    `
+var editorTemplateEnd = `
+    
+    }
+}`;
+
     var expectedResult = '[Viktor, Farcic, John, Doe, Third]';
     var btnFetch = document.getElementById("btnFetch")
     var qText = document.getElementById("qText")
     var editorText = document.getElementById("editor")
     var resultLabel = document.getElementById("result");
+    var resultDiv = document.getElementById("resultDiv")
+    var width = window.innerWidth
+    var expectedOutput = document.getElementById("input")
+    var output = document.getElementById("output")
+    var option = document.getElementById("inlineFormSelectPref")
+    var run = document.getElementById("run")
+    var code;
+    var question;
     var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
         mode: "text/x-c++src",
         theme: "dracula",
@@ -71,12 +93,49 @@
         autoCloseBrackets: true,
 
     })
-    var width = window.innerWidth
-    var input = document.getElementById("input")
-    var output = document.getElementById("output")
-    var run = document.getElementById("run")
     editor.setSize(0.7 * width, "500")
-    var option = document.getElementById("inlineFormSelectPref")
+    
+    
+    // Fetch button Click Event Listener
+    btnFetch.addEventListener("click", async function () {
+        var qData = await fetch("http://localhost:8000/questions")
+        question = await qData.json()
+
+        qText.innerHTML = question.question;
+        editor.getDoc().setValue(editorTemplateStart + "\t" + question.input + editorTemplateEnd);
+        expectedOutput.value = question.expectedOutput;
+    })
+
+    // Run Button Click Event listener 
+    run.addEventListener("click", async function () {
+        code = {
+            code: editor.getValue(),
+            input: "placeholder",
+            lang: option.value
+        }
+
+        var oData = await fetch("http://localhost:8000/compile", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(code)
+        })
+
+        var d = await oData.json()
+        var outputString = d.output.replace(/[\r\n]+/gm, "");
+        output.value = outputString;
+
+        if(question.expectedOutput == output.value){
+            resultLabel.innerText = "Test passed!!!";
+            resultDiv.style.backgroundColor="green";
+         } else{
+            resultLabel.innerText = "Test failed!!!";
+            resultDiv.style.backgroundColor="red";
+         }
+    })
+
+    // Language Dropdown Event Listener
     option.addEventListener("change", function () {
         if (option.value == "Java") {
             editor.setOption("mode", "text/x-java")
@@ -88,45 +147,6 @@
             editor.setOption("mode", "text/x-c++src")
         }
     })
-    var code;
-    
-    // Fetch button Click Event Listener
-    btnFetch.addEventListener("click", async function () {
-        var qData = await fetch("http://localhost:8000/questions")
-        var questions = await qData.json()
-        qText.innerHTML = questions.question;
-        editor.getDoc().setValue(questions.template);
-        console.log(questions.template);
-    })
-
-    // Run Button Click Event listener 
-    run.addEventListener("click", async function () {
-        code = {
-            code: editor.getValue(),
-            input: input.value,
-            lang: option.value
-        }
-        console.log(code)
-        var oData = await fetch("http://localhost:8000/compile", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(code)
-        })
-        var d = await oData.json()
-        var outputString = d.output.replace(/[\r\n]+/gm, "");
-        output.value = outputString;
-
-        if(expectedResult == output.value){
-            resultLabel.innerText = "Tests are passed!!!";
-         } else{
-            resultLabel.innerText = "Tests are failed!!!";
-         }
-    })
-
-    
-    
 </script>
 
 </html>
