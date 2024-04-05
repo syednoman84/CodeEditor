@@ -134,7 +134,7 @@ var editorTemplateEnd = `
         var outputString = d.output.replace(/[\r\n]+/gm, "");
         output.value = outputString;
 
-        if(question.expectedOutput == output.value){
+        if(input.value == output.value){
             resultLabel.innerText = "Test passed!!!";
             resultDiv.style.backgroundColor="green";
          } else{
