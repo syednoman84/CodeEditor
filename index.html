@@ -110,6 +110,7 @@
     </div>
 </body>
 <script>
+
 var editorTemplateStart = 
 `import java.util.*;
 import java.util.stream.Collectors;
@@ -123,6 +124,128 @@ var editorTemplateEnd = `
     
     }
 }`;
+
+var animalClassTemplate =
+`
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Main {
+    public static void main(String[] args) {
+
+        List<Animal> animals = Arrays.asList(
+                new Animal("Lion", "Mammal", 190.0, 3.5),
+                new Animal("Elephant", "Mammal", 5000.0, 10.0),
+                new Animal("Penguin", "Bird", 1.5, 0.5),
+                new Animal("Snake", "Reptile", 10.0, 1.0),
+                new Animal("Dolphin", "Mammal", 300.0, 2.0),
+                new Animal("Eagle", "Bird", 5.0, 0.8),
+                new Animal("Tiger", "Mammal", 250.0, 3.0),
+                new Animal("Crocodile", "Reptile", 150.0, 2.5),
+                new Animal("Giraffe", "Mammal", 1200.0, 5.5),
+                new Animal("Hawk", "Bird", 2.0, 0.6),
+                // Duplicated hawk
+                new Animal("Hawk", "Bird", 2.5, 0.6));
+        
+        // Write your code below this line
+        
+
+    }
+
+    // Animal class
+    static class Animal {
+
+        private String name;
+        private String type;
+        private Double weight;
+        private Double height;
+
+        public Animal(String name, String type, double weight, double height) {
+            this.name = name;
+            this.type = type;
+            this.weight = weight;
+            this.height = height;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public Double getWeight() {
+            return weight;
+        }
+
+        public Double getHeight() {
+            return height;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("(Name=%s,Type=%s,Weight=%s,Height=%s)",
+                    this.getName(),
+                    this.getType(),
+                    this.getWeight().toString(),
+                    this.getHeight().toString());
+
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof Animal)) {
+                return false;
+            }
+
+            var animal = (Animal) o;
+
+            return this.getName().equals(animal.getName()) &&
+                    this.getType().equals(animal.getType());
+
+        }
+    }
+
+    public static void printAnimals(Stream<Animal> animals) {
+        animals.forEach(i -> print(i.getName() + " "));
+    }
+
+    public static void printStrings(Stream<String> params) {
+        params.forEach(i -> print(i + " "));
+    }
+
+    public static void print(List<Animal> animals) {
+        animals.forEach(i -> print(i.getName() + " "));
+    }
+
+    public static void print(Map<String, List<Animal>> animals) {
+        animals.forEach((key, value) -> {
+            print(key + "");
+            print(value);
+            print("");
+        });
+    }
+
+    public static void print(String param) {
+        System.out.print(param);
+    }
+
+    public static void println(String param) {
+        System.out.println(param);
+    }
+
+    public static <T> void print(T object) {
+        print(object.toString());
+    }
+}
+
+
+`
 
     var btnFetch = document.getElementById("btnFetch")
     var qText = document.getElementById("qText")
@@ -164,7 +287,13 @@ var editorTemplateEnd = `
         }
 
         qText.innerHTML = question.question;
-        editor.getDoc().setValue(editorTemplateStart + "\t" + question.input + editorTemplateEnd);
+        
+        if(question.id >= 41 && question.id <=50){
+            editor.getDoc().setValue(animalClassTemplate);    
+        } else{
+            editor.getDoc().setValue(editorTemplateStart + "\t" + question.input + editorTemplateEnd);
+        }
+        
         expectedOutput.value = question.expectedOutput;
         solution.innerHTML = question.solution;
         output.value = "";
@@ -188,10 +317,9 @@ var editorTemplateEnd = `
         })
 
         var d = await oData.json()
-        var outputString = d.output.replace(/[\r\n]+/gm, "");
-        output.value = outputString;
-
-        if(input.value == output.value){
+        output.value = d.output;
+       
+        if(input.value.replace(/[\r\n]+/gm, "") == d.output.replace(/[\r\n]+/gm, "")){
             resultLabel.innerText = "Test passed!!!";
             resultDiv.style.backgroundColor="green";
          } else{

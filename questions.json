@@ -1,128 +1,30 @@
 [
   {
-    "id": 1,
-    "question": "Return the given int[] as Integer[] using streams.",
-    "input": "int[] array = {1, 2, 3, 4, 5};",
-    "expectedOutput": "[1, 2, 3, 4, 5] has Data Type: Integer[]",
-    "solution": "Integer[] bOutput = Arrays.stream(a).boxed().toArray(Integer[]::new);\nSystem.out.println(Arrays.toString(bOutput) + \" has Data Type: \" + bOutput.getClass().getSimpleName());"
+    "id": 40,
+    "question": "Create a class called User with name, age and salary as its members. You must define a constructor for all these 3 members along with their getters and setters. You also need to have its toString() method overridden. The actual output should match the expected output presented to you under the Expected Output section.",
+    "input": "List<User> users = Arrays.asList(\n\t\t\tnew User(\"C\", 30, 25000), \n\t\t\tnew User(\"D\", 40, 150000), \n\t\t\tnew User(\"A\", 10, 10000), \n\t\t\tnew User(\"B\", 20, 300000), \n\t\t\tnew User(\"E\", 50, 90000));",
+    "expectedOutput": "Users sorted by Age:\nUser{name='A', age=10, salary=10000}\nUser{name='B', age=20, salary=300000}\nUser{name='C', age=30, salary=25000}\nUser{name='D', age=40, salary=150000}\nUser{name='E', age=50, salary=90000}\nMax Age is: 50\nTotal of Salaries is: 575000\nAll User Names: C, D, A, B, E",
+    "solution": "List<User> sortedCustomUserList = users.stream().sorted(Comparator.comparingInt(User::getAge)).collect(Collectors.toList());\nsortedCustomUserList.forEach(System.out::println);\n\nInteger maxAge = users.stream().mapToInt(User::getAge).max().orElseThrow(NoSuchElementException::new);\nSystem.out.println(\"Max Age is: \" + maxAge);\n\nInteger sumSal = users.stream().map(User::getSalary).reduce(0, Integer::sum);\nSystem.out.println(\"Total of Salaries is: \" + sumSal);\n\nString userNames = users.stream().map(User::getName).collect(Collectors.joining(\", \")).toString();\nSystem.out.println(userNames);"
   },
   {
-    "id": 2,
-    "question": "Return the given int[] as int[] using streams.",
-    "input": "int[] array = {1, 2, 3, 4, 5};",
-    "expectedOutput": "[1, 2, 3, 4, 5] has Data Type: int[]",
-    "solution": "int[] aOutput = Arrays.stream(a).toArray();\nSystem.out.println(Arrays.toString(aOutput) + \" has Data Type: \" + aOutput.getClass().getSimpleName());"
+    "id": 41,
+    "question": "Print all the animals using streams.",
+    "input": "",
+    "expectedOutput": "Lion\nElephant\nPenguin\nSnake\nDolphin\nEagle\nTiger\nCrocodile\nGiraffe\nHawk\nHawk",
+    "solution": "animals.stream().forEach(i -> System.out.println(i.getName()));"
   },
   {
-    "id": 3,
-    "question": "Return the given Integer[] as Integer[] using streams.",
-    "input": "Integer[] array = {1, 2, 3, 4, 5};",
-    "expectedOutput": "[1, 2, 3, 4, 5] has Data Type: Integer[]",
-    "solution": "Integer[] cOutput = Arrays.stream(c).toArray(Integer[]::new); \nSystem.out.println(Arrays.toString(cOutput) + \" has Data Type: \" + cOutput.getClass().getSimpleName());"
+    "id": 42,
+    "question": "Print all the Birds only.",
+    "input": "",
+    "expectedOutput": "Penguin\nEagle\nHawk\nHawk",
+    "solution": "animals.stream().filter(i -> i.getType().equals(\"Bird\")).forEach(i -> System.out.println(i.getName()));"
   },
   {
-    "id": 4,
-    "question": "Return the given Integer[] as int[] using streams.",
-    "input": "Integer[] array = {1, 2, 3, 4, 5};",
-    "expectedOutput": "[1, 2, 3, 4, 5] has Data Type: int[]",
-    "solution": "int[] dOutput = Arrays.stream(d).mapToInt(val -> val).toArray();\nSystem.out.println(Arrays.toString(dOutput) + \" has Data Type: \" + dOutput.getClass().getSimpleName());"
-  },
-  {
-    "id": 5,
-    "question": "Return the given char[] as joined String using streams.",
-    "input": "char[] c1 = {'g', 'e', 'e', 'k', 's', 'f', 'o', 'r', 'g', 'e', 'e', 'k', 's'};",
-    "expectedOutput": "geeksforgeeks has Data Type: String",
-    "solution": "String strfromChar = Stream.of(charr).map(arr -> new String(arr)).collect(Collectors.joining());\nSystem.out.println(strfromChar + \" has Data Type: \" + strfromChar.getClass().getSimpleName());"
-  },
-  {
-    "id": 6,
-    "question": "Return the given char[] as String[]",
-    "input": "char[] c1 = {'a', 'b', 'c'};",
-    "expectedOutput": "[a, b, c] has Data Type: String[]",
-    "solution": "String[] c1Output = new String(c1).split(\"\");\nSystem.out.println(Arrays.toString(c1Output) + \" has Data Type: \" + c1Output.getClass().getSimpleName());"
-  },
-  {
-    "id": 7,
-    "question": "Return the given String[] as List using streams.",
-    "input": "String[] s3 = {\"Luka\", \"Lebron\", \"Luka\"};",
-    "expectedOutput": "[Luka, Lebron, Luka] has Data Type: ArrayList",
-    "solution": "List<String> s3Output = Arrays.stream(s3).collect(Collectors.toList());\nSystem.out.println(s3Output + \" has Data Type: \" + s3Output.getClass().getSimpleName());"
-  },
-  {
-    "id": 8,
-    "question": "Return the given String[] as HashSet using streams.",
-    "input": "String[] s3 = {\"Luka\", \"Lebron\", \"Luka\"};",
-    "expectedOutput": "[Lebron, Luka] has Data Type: HashSet",
-    "solution": "Set<String> s4Output = Arrays.stream(s4).collect(Collectors.toSet());\nSystem.out.println(s4Output + \" has Data Type: \" + s4Output.getClass().getSimpleName());"
-  },
-  {
-    "id": 9,
-    "question": "Return the given String[] as TreeSet using streams.",
-    "input": "String[] s3 = {\"Luka\", \"Lebron\", \"Luka\"};",
-    "expectedOutput": "[Lebron, Luka] has Data Type: TreeSet",
-    "solution": "Set<String> s5Output = Arrays.stream(s5).collect(Collectors.toCollection(TreeSet::new));\nSystem.out.println(s5Output + \" has Data Type: \" + s5Output.getClass().getSimpleName());"
-  },
-  {
-    "id": 10,
-    "question": "Return the map of lengths of each string of a given ArrayList using streams.",
-    "input": "List<String> list = new ArrayList<>(List.of(\"lions\", \"tigers\", \"bears\"));",
-    "expectedOutput": "{lions=5, bears=5, tigers=6} has Data Type: HashMap",
-    "solution": "Map<String, Integer> mapOfLenghtsFromStream = forCollectors.stream().collect(Collectors.toMap(m1 -> m1, String::length));\nSystem.out.println(mapOfLenghtsFromStream + \" has Data Type: \" + mapOfLenghtsFromStream.getClass().getSimpleName());"
-  },
-  {
-    "id": 11,
-    "question": "Return the map of unique lengths from the strings of a given ArrayList using streams. Note that there are strings with same lenght so you can't have duplicate keys in the map. In that case, you have to group the strings of same length in the map as shown in the expected output.",
-    "input": "List<String> list = new ArrayList<>(List.of(\"lions\", \"tigers\", \"bears\"));",
-    "expectedOutput": "{5=lions,bears, 6=tigers} has Data Type: HashMap",
-    "solution": "Map<Integer, String> mapToHandleDulicateKeys = forCollectors.stream().collect(Collectors.toMap(String::length, k -> k, (str1, str2) -> str1 + \",\" + str2));\nSystem.out.println(mapToHandleDulicateKeys + \" has Data Type: \" + mapToHandleDulicateKeys.getClass().getSimpleName());"
-  },
-  {
-    "id": 12,
-    "question": "Return the map such that all the strings are grouped by their lengths. The map key column should contain unique lengths and value column should contain the List of Strings from the given array list as shown in the expected output.",
-    "input": "List<String> list = new ArrayList<>(List.of(\"lions\", \"tigers\", \"bears\"));",
-    "expectedOutput": "{5=[lions, bears], 6=[tigers]} has Data Type: HashMap",
-    "solution": "Map<Integer, List<String>> groupingMap = forCollectors.stream().collect(Collectors.groupingBy(String::length));\nSystem.out.println(groupingMap + \" has Data Type: \" + groupingMap.getClass().getSimpleName());"
-  },
-  {
-    "id": 13,
-    "question": "Return the Partition type such that all the Strings with length less than 6 are part of true partition and all the Strings with lengths greater than 6 are part of false partition using streams as shown in the expected output.",
-    "input": "List<String> list = new ArrayList<>(List.of(\"lions\", \"tigers\", \"bears\"));",
-    "expectedOutput": "{false=[tigers], true=[lions, bears]} has Data Type: Partition",
-    "solution": "Map<Boolean, List<String>> partitioningMap = forCollectors.stream().collect(Collectors.partitioningBy(voo -> voo.length() <= 5));\nSystem.out.println(partitioningMap + \" has Data Type: \" + partitioningMap.getClass().getSimpleName());"
-  },
-  {
-    "id": 14,
-    "question": "Return the HashMap from the given List of Strings such that key column represents the unique lengths of each string and value column represents the count of all strings with the lengths equal to key column using streams as shown in the expected output.",
-    "input": "List<String> list = new ArrayList<>(List.of(\"lions\", \"tigers\", \"bears\"));",
-    "expectedOutput": "{5=2, 6=1} has Data Type: HashMap",
-    "solution": "Map<Integer, Long> calculatedKeyValueMap = forCollectors.stream().collect(Collectors.groupingBy(String::length, Collectors.counting()));\nSystem.out.println(calculatedKeyValueMap + \" has Data Type: \" + calculatedKeyValueMap.getClass().getSimpleName());"
-  },
-  {
-    "id": 15,
-    "question": "Return the HashMap to get the first letter of the first animal alphabetically of each length as shown in the expected output.",
-    "input": "List<String> list = new ArrayList<>(List.of(\"lions\", \"tigers\", \"bears\", \"puma\", \"cheetah\", \"snake\", \"parrot\"));",
-    "expectedOutput": "{4=Optional[p], 5=Optional[b], 6=Optional[p], 7=Optional[c]} has Data Type: HashMap",
-    "solution": "Map<Integer, Optional<Character>> firstLetterMap = forCollectors2.stream().collect(Collectors.groupingBy(String::length, Collectors.mapping(foo -> foo.charAt(0), Collectors.minBy((pee, vee) -> pee - vee))));\nSystem.out.println(firstLetterMap + \" has Data Type: \" + firstLetterMap.getClass().getSimpleName());"
-  },
-  {
-    "id": 16,
-    "question": "Return the sum of all values in the given int[] array using streams.",
-    "input": "int[] array = {1, 2, 3, 4, 5};",
-    "expectedOutput": "15",
-    "solution": "System.out.println(Arrays.stream(array).sum());"
-  },
-  {
-    "id": 17,
-    "question": "Return the sum of all values in the given Integer[] array using streams.",
-    "input": "int[] array = {1, 2, 3, 4, 5};",
-    "expectedOutput": "15",
-    "solution": "System.out.println(Arrays.stream(array).mapToInt(v -> v).sum());"
-  },
-  {
-    "id": 18,
-    "question": "Return only the odd values from the given array using streams.",
-    "input": "int[] array = {1, 2, 3, 4, 5};",
-    "expectedOutput": "[1, 3, 5]",
-    "solution": "int[] res = Arrays.stream(array).filter(v -> v % 2 != 0).toArray();\nSystem.out.println(Arrays.toString(res));"
+    "id": 43,
+    "question": "Find the fist Hawk",
+    "input": "",
+    "expectedOutput": "(Name=Hawk,Type=Bird,Weight=2.0,Height=0.6)",
+    "solution": "var hawk = animals.stream().filter(i -> i.getName().equals(\"Hawk\")).findFirst();\nif (hawk.isPresent()) {print(hawk.get());}"
   }
 ]

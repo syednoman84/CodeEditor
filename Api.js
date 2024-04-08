@@ -98,7 +98,10 @@ app.post("/compile", function (req, res) {
           if (data.output) {
             res.send(data);
           } else {
-            res.send({ output: "error" });
+            res.send({
+              output:
+                "Error - Please check your code or temp class file for errors.",
+            });
           }
         });
       } else {
@@ -109,7 +112,10 @@ app.post("/compile", function (req, res) {
           if (data.output) {
             res.send(data);
           } else {
-            res.send({ output: "error" });
+            res.send({
+              output:
+                "Error - Please check your code or temp class file for errors.",
+            });
           }
         });
       }
