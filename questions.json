@@ -81,14 +81,14 @@
     "question": "Return the map such that all the strings are grouped by their lengths. The map key column should contain unique lengths and value column should contain the List of Strings from the given array list as shown in the expected output.",
     "input": "List<String> list = new ArrayList<>(List.of(\"lions\", \"tigers\", \"bears\"));",
     "expectedOutput": "{5=[lions, bears], 6=[tigers]} has Data Type: HashMap",
-    "solution": "Map<Integer, List<String>> groupingMap = forCollectors.stream().collect(Collectors.groupingBy(String::length));\nSystem.out.println(groupingMap + \" has Data Type: \" + groupingMap.getClass().getSimpleName());"
+    "solution": "Map<Integer, List<String> groupingMap = forCollectors.stream().collect(Collectors.groupingBy(String::length));\nSystem.out.println(groupingMap + \" has Data Type: \" + groupingMap.getClass().getSimpleName());"
   },
   {
     "id": 13,
     "question": "Return the Partition type such that all the Strings with length less than 6 are part of true partition and all the Strings with lengths greater than 6 are part of false partition using streams as shown in the expected output.",
     "input": "List<String> list = new ArrayList<>(List.of(\"lions\", \"tigers\", \"bears\"));",
     "expectedOutput": "{false=[tigers], true=[lions, bears]} has Data Type: Partition",
-    "solution": "Map<Boolean, List<String>> partitioningMap = forCollectors.stream().collect(Collectors.partitioningBy(voo -> voo.length() <= 5));\nSystem.out.println(partitioningMap + \" has Data Type: \" + partitioningMap.getClass().getSimpleName());"
+    "solution": "Map<Boolean, List<String> partitioningMap = forCollectors.stream().collect(Collectors.partitioningBy(voo -> voo.length() <= 5));\nSystem.out.println(partitioningMap + \" has Data Type: \" + partitioningMap.getClass().getSimpleName());"
   },
   {
     "id": 14,
@@ -102,7 +102,7 @@
     "question": "Return the HashMap to get the first letter of the first animal alphabetically of each length as shown in the expected output.",
     "input": "List<String> list = new ArrayList<>(List.of(\"lions\", \"tigers\", \"bears\", \"puma\", \"cheetah\", \"snake\", \"parrot\"));",
     "expectedOutput": "{4=Optional[p], 5=Optional[b], 6=Optional[p], 7=Optional[c]} has Data Type: HashMap",
-    "solution": "Map<Integer, Optional<Character>> firstLetterMap = forCollectors2.stream().collect(Collectors.groupingBy(String::length, Collectors.mapping(foo -> foo.charAt(0), Collectors.minBy((pee, vee) -> pee - vee))));\nSystem.out.println(firstLetterMap + \" has Data Type: \" + firstLetterMap.getClass().getSimpleName());"
+    "solution": "Map<Integer, Optional<Character> firstLetterMap = forCollectors2.stream().collect(Collectors.groupingBy(String::length, Collectors.mapping(foo -> foo.charAt(0), Collectors.minBy((pee, vee) -> pee - vee))));\nSystem.out.println(firstLetterMap + \" has Data Type: \" + firstLetterMap.getClass().getSimpleName());"
   },
   {
     "id": 16,

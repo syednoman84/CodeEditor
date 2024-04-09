@@ -20,6 +20,12 @@ app.get("/", function (req, res) {
   res.sendFile("C:/Noman/code/github/CodeEditor/index.html");
 });
 
+// app.get("/get-count", function (req, res) {
+//   var fs = require("fs");
+//   var questions = JSON.parse(fs.readFileSync("./questions.json"));
+//   res.send(questions.length);
+// });
+
 app.get("/get-all-questions", function (req, res) {
   var fs = require("fs");
 

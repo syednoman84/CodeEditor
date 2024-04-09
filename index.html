@@ -59,6 +59,21 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        .parent {
+            /* border: 1px solid black; */
+            /* margin: 1rem; */
+            /* padding: 2rem 2rem; */
+            /* text-align: left; */
+        }
+
+        .child {
+            /* display: inline-block;
+            font-weight: bold; */
+            
+        }
+
+        
     </style>
 </head>
 
@@ -76,14 +91,16 @@
                     </select>
                 </div>
                 <div>
+                    <label id="totalQuestions" class="text-light"></label>
                     <button type="button" id="btnFetch" class="btn btn-success">Random One</button>
-                    <button type="button" id="btnFetchAll" class="btn btn-success">All You Can Eat</button>
+                    <button type="button" id="btnNext" class="btn btn-success">Start/Next</button>
+                    <!-- <button type="button" id="btnFetchAll" class="btn btn-success">All You Can Eat</button> -->
                     <button type="button" id="run" class="btn btn-primary">Submit Code</button>
                     <button type="button" id="btnSolution" class="btn btn-danger">Show Solution</button>
                 </div>
             </div>
             <div class="d-flex justify-content-between mb-2 bg-dark rounded p-2">
-                <p style="color:aliceblue" id="qText">Please click the Fetch Question button to load a new question</p>
+                <p style="color:aliceblue" id="qText">Please click the Random One or Start/Next button to load questions</p>
             </div>
             <textarea type="text" id="editor" class="form-control" aria-label="First name"></textarea>
         </div>
@@ -98,9 +115,6 @@
                 <div id="resultDiv" style="text-align: center; color: white"><h2 id="result">....</h2></div>
             </div>
         </div>
-        <div><div id="nextDiv" class="h-75" style="display: none;">
-            <button type="button" id="btnNext" class="btn btn-info mt-2">Next Question</button>
-        </div></div>
     </div>
     
     <!-- The Modal -->
@@ -120,6 +134,7 @@ var editorTemplateStart =
 import java.util.stream.Collectors;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {    
@@ -251,8 +266,9 @@ public class Main {
 
 `
 
+    var totalQuestions = document.getElementById("totalQuestions")
     var btnFetch = document.getElementById("btnFetch")
-    var btnFetchAll = document.getElementById("btnFetchAll")
+    // var btnFetchAll = document.getElementById("btnFetchAll")
     var btnNext = document.getElementById("btnNext")
     var qText = document.getElementById("qText")
     var editorText = document.getElementById("editor")
@@ -266,8 +282,7 @@ public class Main {
     var code;
     var question;
     var questions = [];
-    var counter = 1;
-    var nextDiv = document.getElementById("nextDiv");
+    var counter = 0;
 
     
     var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
@@ -283,36 +298,45 @@ public class Main {
     var modal = document.getElementById("myModal");
     var btn = document.getElementById("btnSolution");
     var span = document.getElementsByClassName("close")[0];
+
+    window.onload = async () => {
+        let promiseData = await promiseOfFetch;
+        questions = promiseData;
+        totalQuestions.innerHTML = "Total Questions: " + promiseData.length;
+    };
+
+    const promiseOfFetch = fetch("http://localhost:8000/get-all-questions")
+                                .then(r => r.json())
+                                .then(data => { 
+                                    return data;
+                                });
     
     // Fetch All button Click Event Listener
-    btnFetchAll.addEventListener("click", async function () {
-        nextDiv.style.display="block";
-        var solution = document.getElementById("solution")
+    // btnFetchAll.addEventListener("click", async function () {
+    //     var solution = document.getElementById("solution")
 
-        var qData = await fetch("http://localhost:8000/get-all-questions")
-        questions = await qData.json()
-        console.log(questions);
-        qText.innerHTML = questions[0].question;
+    //     var qData = await fetch("http://localhost:8000/get-all-questions")
+    //     questions = await qData.json()
+    //     qText.innerHTML = counter + ". " + questions[0].question;
         
-        if(questions[0].id >= 41 && questions[0].id <=55){
-            editor.getDoc().setValue(animalClassTemplate);    
-        } else{
-            editor.getDoc().setValue(editorTemplateStart + "\t" + questions[0].input + editorTemplateEnd);
-        }
+    //     if(questions[0].id >= 41 && questions[0].id <=55){
+    //         editor.getDoc().setValue(animalClassTemplate);    
+    //     } else{
+    //         editor.getDoc().setValue(editorTemplateStart + "\t" + questions[0].input + editorTemplateEnd);
+    //     }
         
-        expectedOutput.value = questions[0].expectedOutput;
-        solution.innerHTML = questions[0].solution;
-        output.value = "";
-        resultLabel.innerText ="....";
-        resultDiv.style.backgroundColor="black";
-        counter=1;
+    //     expectedOutput.value = questions[0].expectedOutput;
+    //     solution.innerHTML = questions[0].solution;
+    //     output.value = "";
+    //     resultLabel.innerText ="....";
+    //     resultDiv.style.backgroundColor="black";
+    //     counter=1;
 
 
-    })
+    // })
 
     // Fetch Random One button Click Event Listener
     btnFetch.addEventListener("click", async function () {
-        nextDiv.style.display="none";
         var solution = document.getElementById("solution")
 
         var qData = await fetch("http://localhost:8000/get-one-random-question")
@@ -347,7 +371,7 @@ public class Main {
         var solution = document.getElementById("solution");
 
         if(counter >= questions.length){
-            qText.innerHTML = "No more questions are available. Please restart with Random One or All You Can Eat!!!";
+            qText.innerHTML = "No more questions are available. Please restart with Random One or Start/Next buttons.";
             editor.getDoc().setValue("");
             expectedOutput.value = "";
             solution.innerHTML = "";
@@ -355,8 +379,7 @@ public class Main {
             resultLabel.innerText ="....";
             resultDiv.style.backgroundColor="black";
         } else {
-            console.log(counter);
-            qText.innerHTML = questions[counter].question;
+            qText.innerHTML = counter + 1 + ". " + questions[counter].question;
             
             if(questions[counter].id >= 41 && questions[counter].id <=55){
                 editor.getDoc().setValue(animalClassTemplate);    
