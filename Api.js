@@ -20,7 +20,14 @@ app.get("/", function (req, res) {
   res.sendFile("C:/Noman/code/github/CodeEditor/index.html");
 });
 
-app.get("/questions", function (req, res) {
+app.get("/get-all-questions", function (req, res) {
+  var fs = require("fs");
+
+  // reads the questions.json file and send back
+  res.send(JSON.parse(fs.readFileSync("./questions.json")));
+});
+
+app.get("/get-one-random-question", function (req, res) {
   var fs = require("fs");
 
   // reads the questions.json file

@@ -76,8 +76,9 @@
                     </select>
                 </div>
                 <div>
-                    <button type="button" id="btnFetch" class="btn btn-success">Fetch Question</button>
-                    <button type="button" id="run" class="btn btn-success">Submit Code</button>
+                    <button type="button" id="btnFetch" class="btn btn-success">Random One</button>
+                    <button type="button" id="btnFetchAll" class="btn btn-success">All You Can Eat</button>
+                    <button type="button" id="run" class="btn btn-primary">Submit Code</button>
                     <button type="button" id="btnSolution" class="btn btn-danger">Show Solution</button>
                 </div>
             </div>
@@ -97,6 +98,9 @@
                 <div id="resultDiv" style="text-align: center; color: white"><h2 id="result">....</h2></div>
             </div>
         </div>
+        <div><div id="nextDiv" class="h-75" style="display: none;">
+            <button type="button" id="btnNext" class="btn btn-info mt-2">Next Question</button>
+        </div></div>
     </div>
     
     <!-- The Modal -->
@@ -248,6 +252,8 @@ public class Main {
 `
 
     var btnFetch = document.getElementById("btnFetch")
+    var btnFetchAll = document.getElementById("btnFetchAll")
+    var btnNext = document.getElementById("btnNext")
     var qText = document.getElementById("qText")
     var editorText = document.getElementById("editor")
     var resultLabel = document.getElementById("result");
@@ -259,6 +265,11 @@ public class Main {
     var run = document.getElementById("run")
     var code;
     var question;
+    var questions = [];
+    var counter = 1;
+    var nextDiv = document.getElementById("nextDiv");
+
+    
     var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
         mode: "text/x-c++src",
         theme: "dracula",
@@ -273,22 +284,49 @@ public class Main {
     var btn = document.getElementById("btnSolution");
     var span = document.getElementsByClassName("close")[0];
     
-    // Fetch button Click Event Listener
-    btnFetch.addEventListener("click", async function () {
+    // Fetch All button Click Event Listener
+    btnFetchAll.addEventListener("click", async function () {
+        nextDiv.style.display="block";
         var solution = document.getElementById("solution")
 
-        var qData = await fetch("http://localhost:8000/questions")
+        var qData = await fetch("http://localhost:8000/get-all-questions")
+        questions = await qData.json()
+        console.log(questions);
+        qText.innerHTML = questions[0].question;
+        
+        if(questions[0].id >= 41 && questions[0].id <=55){
+            editor.getDoc().setValue(animalClassTemplate);    
+        } else{
+            editor.getDoc().setValue(editorTemplateStart + "\t" + questions[0].input + editorTemplateEnd);
+        }
+        
+        expectedOutput.value = questions[0].expectedOutput;
+        solution.innerHTML = questions[0].solution;
+        output.value = "";
+        resultLabel.innerText ="....";
+        resultDiv.style.backgroundColor="black";
+        counter=1;
+
+
+    })
+
+    // Fetch Random One button Click Event Listener
+    btnFetch.addEventListener("click", async function () {
+        nextDiv.style.display="none";
+        var solution = document.getElementById("solution")
+
+        var qData = await fetch("http://localhost:8000/get-one-random-question")
         question = await qData.json()
 
         // check to avoid repeated question
         if(qText.innerHTML == question.question){
-            qData = await fetch("http://localhost:8000/questions")
+            qData = await fetch("http://localhost:8000/get-one-random-question")
             question = await qData.json()
         }
 
         qText.innerHTML = question.question;
         
-        if(question.id >= 41 && question.id <=50){
+        if(question.id >= 41 && question.id <=55){
             editor.getDoc().setValue(animalClassTemplate);    
         } else{
             editor.getDoc().setValue(editorTemplateStart + "\t" + question.input + editorTemplateEnd);
@@ -297,7 +335,42 @@ public class Main {
         expectedOutput.value = question.expectedOutput;
         solution.innerHTML = question.solution;
         output.value = "";
+        resultLabel.innerText ="....";
+        resultDiv.style.backgroundColor="black";
 
+
+    })
+
+    
+    // Next Question button Click Event Listener
+    btnNext.addEventListener("click", async function () {
+        var solution = document.getElementById("solution");
+
+        if(counter >= questions.length){
+            qText.innerHTML = "No more questions are available. Please restart with Random One or All You Can Eat!!!";
+            editor.getDoc().setValue("");
+            expectedOutput.value = "";
+            solution.innerHTML = "";
+            output.value = "";
+            resultLabel.innerText ="....";
+            resultDiv.style.backgroundColor="black";
+        } else {
+            console.log(counter);
+            qText.innerHTML = questions[counter].question;
+            
+            if(questions[counter].id >= 41 && questions[counter].id <=55){
+                editor.getDoc().setValue(animalClassTemplate);    
+            } else{
+                editor.getDoc().setValue(editorTemplateStart + "\t" + questions[counter].input + editorTemplateEnd);
+            }
+            
+            expectedOutput.value = questions[counter].expectedOutput;
+            solution.innerHTML = questions[counter].solution;
+            output.value = "";
+            resultLabel.innerText ="....";
+            resultDiv.style.backgroundColor="black";
+            counter++;
+        }
     })
 
     // Run Button Click Event listener 

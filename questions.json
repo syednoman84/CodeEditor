@@ -1,5 +1,278 @@
 [
   {
+    "id": 1,
+    "question": "Return the given int[] as Integer[] using streams.",
+    "input": "int[] array = {1, 2, 3, 4, 5};",
+    "expectedOutput": "[1, 2, 3, 4, 5] has Data Type: Integer[]",
+    "solution": "Integer[] bOutput = Arrays.stream(a).boxed().toArray(Integer[]::new);\nSystem.out.println(Arrays.toString(bOutput) + \" has Data Type: \" + bOutput.getClass().getSimpleName());"
+  },
+  {
+    "id": 2,
+    "question": "Return the given int[] as int[] using streams.",
+    "input": "int[] array = {1, 2, 3, 4, 5};",
+    "expectedOutput": "[1, 2, 3, 4, 5] has Data Type: int[]",
+    "solution": "int[] aOutput = Arrays.stream(a).toArray();\nSystem.out.println(Arrays.toString(aOutput) + \" has Data Type: \" + aOutput.getClass().getSimpleName());"
+  },
+  {
+    "id": 3,
+    "question": "Return the given Integer[] as Integer[] using streams.",
+    "input": "Integer[] array = {1, 2, 3, 4, 5};",
+    "expectedOutput": "[1, 2, 3, 4, 5] has Data Type: Integer[]",
+    "solution": "Integer[] cOutput = Arrays.stream(c).toArray(Integer[]::new); \nSystem.out.println(Arrays.toString(cOutput) + \" has Data Type: \" + cOutput.getClass().getSimpleName());"
+  },
+  {
+    "id": 4,
+    "question": "Return the given Integer[] as int[] using streams.",
+    "input": "Integer[] array = {1, 2, 3, 4, 5};",
+    "expectedOutput": "[1, 2, 3, 4, 5] has Data Type: int[]",
+    "solution": "int[] dOutput = Arrays.stream(d).mapToInt(val -> val).toArray();\nSystem.out.println(Arrays.toString(dOutput) + \" has Data Type: \" + dOutput.getClass().getSimpleName());"
+  },
+  {
+    "id": 5,
+    "question": "Return the given char[] as joined String using streams.",
+    "input": "char[] c1 = {'g', 'e', 'e', 'k', 's', 'f', 'o', 'r', 'g', 'e', 'e', 'k', 's'};",
+    "expectedOutput": "geeksforgeeks has Data Type: String",
+    "solution": "String strfromChar = Stream.of(charr).map(arr -> new String(arr)).collect(Collectors.joining());\nSystem.out.println(strfromChar + \" has Data Type: \" + strfromChar.getClass().getSimpleName());"
+  },
+  {
+    "id": 6,
+    "question": "Return the given char[] as String[]",
+    "input": "char[] c1 = {'a', 'b', 'c'};",
+    "expectedOutput": "[a, b, c] has Data Type: String[]",
+    "solution": "String[] c1Output = new String(c1).split(\"\");\nSystem.out.println(Arrays.toString(c1Output) + \" has Data Type: \" + c1Output.getClass().getSimpleName());"
+  },
+  {
+    "id": 7,
+    "question": "Return the given String[] as List using streams.",
+    "input": "String[] s3 = {\"Luka\", \"Lebron\", \"Luka\"};",
+    "expectedOutput": "[Luka, Lebron, Luka] has Data Type: ArrayList",
+    "solution": "List<String> s3Output = Arrays.stream(s3).collect(Collectors.toList());\nSystem.out.println(s3Output + \" has Data Type: \" + s3Output.getClass().getSimpleName());"
+  },
+  {
+    "id": 8,
+    "question": "Return the given String[] as HashSet using streams.",
+    "input": "String[] s3 = {\"Luka\", \"Lebron\", \"Luka\"};",
+    "expectedOutput": "[Lebron, Luka] has Data Type: HashSet",
+    "solution": "Set<String> s4Output = Arrays.stream(s4).collect(Collectors.toSet());\nSystem.out.println(s4Output + \" has Data Type: \" + s4Output.getClass().getSimpleName());"
+  },
+  {
+    "id": 9,
+    "question": "Return the given String[] as TreeSet using streams.",
+    "input": "String[] s3 = {\"Luka\", \"Lebron\", \"Luka\"};",
+    "expectedOutput": "[Lebron, Luka] has Data Type: TreeSet",
+    "solution": "Set<String> s5Output = Arrays.stream(s5).collect(Collectors.toCollection(TreeSet::new));\nSystem.out.println(s5Output + \" has Data Type: \" + s5Output.getClass().getSimpleName());"
+  },
+  {
+    "id": 10,
+    "question": "Return the map of lengths of each string of a given ArrayList using streams.",
+    "input": "List<String> list = new ArrayList<>(List.of(\"lions\", \"tigers\", \"bears\"));",
+    "expectedOutput": "{lions=5, bears=5, tigers=6} has Data Type: HashMap",
+    "solution": "Map<String, Integer> mapOfLenghtsFromStream = forCollectors.stream().collect(Collectors.toMap(m1 -> m1, String::length));\nSystem.out.println(mapOfLenghtsFromStream + \" has Data Type: \" + mapOfLenghtsFromStream.getClass().getSimpleName());"
+  },
+  {
+    "id": 11,
+    "question": "Return the map of unique lengths from the strings of a given ArrayList using streams. Note that there are strings with same lenght so you can't have duplicate keys in the map. In that case, you have to group the strings of same length in the map as shown in the expected output.",
+    "input": "List<String> list = new ArrayList<>(List.of(\"lions\", \"tigers\", \"bears\"));",
+    "expectedOutput": "{5=lions,bears, 6=tigers} has Data Type: HashMap",
+    "solution": "Map<Integer, String> mapToHandleDulicateKeys = forCollectors.stream().collect(Collectors.toMap(String::length, k -> k, (str1, str2) -> str1 + \",\" + str2));\nSystem.out.println(mapToHandleDulicateKeys + \" has Data Type: \" + mapToHandleDulicateKeys.getClass().getSimpleName());"
+  },
+  {
+    "id": 12,
+    "question": "Return the map such that all the strings are grouped by their lengths. The map key column should contain unique lengths and value column should contain the List of Strings from the given array list as shown in the expected output.",
+    "input": "List<String> list = new ArrayList<>(List.of(\"lions\", \"tigers\", \"bears\"));",
+    "expectedOutput": "{5=[lions, bears], 6=[tigers]} has Data Type: HashMap",
+    "solution": "Map<Integer, List<String>> groupingMap = forCollectors.stream().collect(Collectors.groupingBy(String::length));\nSystem.out.println(groupingMap + \" has Data Type: \" + groupingMap.getClass().getSimpleName());"
+  },
+  {
+    "id": 13,
+    "question": "Return the Partition type such that all the Strings with length less than 6 are part of true partition and all the Strings with lengths greater than 6 are part of false partition using streams as shown in the expected output.",
+    "input": "List<String> list = new ArrayList<>(List.of(\"lions\", \"tigers\", \"bears\"));",
+    "expectedOutput": "{false=[tigers], true=[lions, bears]} has Data Type: Partition",
+    "solution": "Map<Boolean, List<String>> partitioningMap = forCollectors.stream().collect(Collectors.partitioningBy(voo -> voo.length() <= 5));\nSystem.out.println(partitioningMap + \" has Data Type: \" + partitioningMap.getClass().getSimpleName());"
+  },
+  {
+    "id": 14,
+    "question": "Return the HashMap from the given List of Strings such that key column represents the unique lengths of each string and value column represents the count of all strings with the lengths equal to key column using streams as shown in the expected output.",
+    "input": "List<String> list = new ArrayList<>(List.of(\"lions\", \"tigers\", \"bears\"));",
+    "expectedOutput": "{5=2, 6=1} has Data Type: HashMap",
+    "solution": "Map<Integer, Long> calculatedKeyValueMap = forCollectors.stream().collect(Collectors.groupingBy(String::length, Collectors.counting()));\nSystem.out.println(calculatedKeyValueMap + \" has Data Type: \" + calculatedKeyValueMap.getClass().getSimpleName());"
+  },
+  {
+    "id": 15,
+    "question": "Return the HashMap to get the first letter of the first animal alphabetically of each length as shown in the expected output.",
+    "input": "List<String> list = new ArrayList<>(List.of(\"lions\", \"tigers\", \"bears\", \"puma\", \"cheetah\", \"snake\", \"parrot\"));",
+    "expectedOutput": "{4=Optional[p], 5=Optional[b], 6=Optional[p], 7=Optional[c]} has Data Type: HashMap",
+    "solution": "Map<Integer, Optional<Character>> firstLetterMap = forCollectors2.stream().collect(Collectors.groupingBy(String::length, Collectors.mapping(foo -> foo.charAt(0), Collectors.minBy((pee, vee) -> pee - vee))));\nSystem.out.println(firstLetterMap + \" has Data Type: \" + firstLetterMap.getClass().getSimpleName());"
+  },
+  {
+    "id": 16,
+    "question": "Return the sum of all values in the given int[] array using streams.",
+    "input": "int[] array = {1, 2, 3, 4, 5};",
+    "expectedOutput": "15",
+    "solution": "System.out.println(Arrays.stream(array).sum());"
+  },
+  {
+    "id": 17,
+    "question": "Return the sum of all values in the given Integer[] array using streams.",
+    "input": "int[] array = {1, 2, 3, 4, 5};",
+    "expectedOutput": "15",
+    "solution": "System.out.println(Arrays.stream(array).mapToInt(v -> v).sum());"
+  },
+  {
+    "id": 18,
+    "question": "Return only the odd values from the given array using streams.",
+    "input": "int[] array = {1, 2, 3, 4, 5};",
+    "expectedOutput": "[1, 3, 5]",
+    "solution": "int[] res = Arrays.stream(array).filter(v -> v % 2 != 0).toArray();\nSystem.out.println(Arrays.toString(res));"
+  },
+  {
+    "id": 19,
+    "question": "Return statistics as shown in the expected output before adding a new value as 1 and after adding a new value as 1 in the list. Only IntSummaryStatistics api is allowed to solve this question.",
+    "input": "List<Integer> listForStatistics = new ArrayList<>(List.of(2, 3, 5, 6, 33, 22, 14, 64, 40, 100));",
+    "expectedOutput": "Statistics on original list:\n100\n2\n28.9\n10\nStatistics after adding 1 to the list:\n100\n1\n26.363636363636363\n11",
+    "solution": "IntSummaryStatistics summaryStatistics = listForStatistics.stream().mapToInt(Integer::intValue).summaryStatistics();\nint maxVal = summaryStatistics.getMax();\nint minVal = summaryStatistics.getMin();\ndouble avgVal = summaryStatistics.getAverage();\nlong countVal = summaryStatistics.getCount();\nsummaryStatistics.accept(1);"
+  },
+  {
+    "id": 20,
+    "question": "Return the sorted array using streams from the given array.",
+    "input": "int[] unsortedArray = {65, 65, 2, 9, 0, 100};",
+    "expectedOutput": "[0, 2, 9, 65, 65, 100]",
+    "solution": "int[] sortedArray = Arrays.stream(unsortedArray).sorted().toArray();\nSystem.out.println(Arrays.toString(sortedArray));"
+  },
+  {
+    "id": 21,
+    "question": "Return the given array as sorted array in reverse order.",
+    "input": "int[] unsortedArray2 = {65, 65, 2, 9, 0, 100};",
+    "expectedOutput": "[100, 65, 65, 9, 2, 0]",
+    "solution": "int[] reversesortedArray2 = Arrays.stream(unsortedArray2)\n\t.boxed()\n\t.sorted(Comparator.reverseOrder())\n\t.mapToInt(Integer::intValue)\n\t.toArray();\nSystem.out.println(Arrays.toString(reversesortedArray2));"
+  },
+  {
+    "id": 22,
+    "question": "Return the given array list as sorted array list.",
+    "input": "List<String> unsortedList = Arrays.asList(\"9\", \"A\", \"Z\", \"1\", \"B\", \"Y\", \"4\", \"a\", \"c\");",
+    "expectedOutput": "[1, 4, 9, A, B, Y, Z, a, c]",
+    "solution": "List<String> sortedList = unsortedList.stream().sorted().collect(Collectors.toList());\nSystem.out.println(sortedList);"
+  },
+  {
+    "id": 23,
+    "question": "Return the given array list as sorted array list in reverse order.",
+    "input": "List<String> unsortedList2 = Arrays.asList(\"9\", \"A\", \"Z\", \"1\", \"B\", \"Y\", \"4\", \"a\", \"c\");",
+    "expectedOutput": "[c, a, Z, Y, B, A, 9, 4, 1]",
+    "solution": "List<String> sortedList2 = unsortedList2.stream()\n\t.sorted(Comparator.reverseOrder())\n\t.collect(Collectors.toList());\nSystem.out.println(sortedList2);"
+  },
+  {
+    "id": 24,
+    "question": "Return the sum, average, maximum and minimum of the values of given array.",
+    "input": "int[] nums = {3, 1, 6, 4, 9, 20, 18, 30, 44};",
+    "expectedOutput": "135\n5.0\n44\n1",
+    "solution": "int sum = Arrays.stream(nums).sum();\ndouble avg = Arrays.stream(nums).average().orElse(0);\nint max = Arrays.stream(nums).max().orElse(0);\nint min = Arrays.stream(nums).min().orElse(0);"
+  },
+  {
+    "id": 25,
+    "question": "Return the sum, average, maximum and minimum of the values of given array list as primitives so int for sum, min, max and double for average using streams.",
+    "input": "List<Integer> listsInts = new ArrayList<>(List.of(2, 6, 1, 22, 4, -6, 6, 30, 6, 9));",
+    "expectedOutput": "80\n8.0\n30\n-6",
+    "solution": "int listSum = listsInts.stream().mapToInt(x -> x).sum();\ndouble listAvg = listsInts.stream().mapToInt(x -> x).average().orElse(0);\nint listMax = listsInts.stream().mapToInt(x -> x).max().orElse(0);\nint listMin = listsInts.stream().mapToInt(x -> x).min().orElse(0);"
+  },
+  {
+    "id": 26,
+    "question": "Count and return the number of empty strings exist in the given Array List",
+    "input": "List<String> strList = Arrays.asList(\"abc\", \"\", \"bcd\", \"\", \"defg\", \"jk\");",
+    "expectedOutput": "2",
+    "solution": "long count = strList.stream().filter(x -> x.isEmpty()).count();\nSystem.out.println(count);"
+  },
+  {
+    "id": 27,
+    "question": "Count and return the number of strings having length greater than 3 in the given Array List",
+    "input": "List<String> strList = Arrays.asList(\"abc\", \"\", \"bcd\", \"\", \"defg\", \"jk\");",
+    "expectedOutput": "1",
+    "solution": "long num = strList.stream().filter(x -> x.length() > 3).count();\nSystem.out.println(num);"
+  },
+  {
+    "id": 28,
+    "question": "Count and return the number of strings which starts with letter \"a\" in the given Array List",
+    "input": "List<String> strList = Arrays.asList(\"abc\", \"\", \"bcd\", \"\", \"defg\", \"jk\");",
+    "expectedOutput": "1",
+    "solution": "count = strList.stream().filter(x -> x.startsWith(\"a\")).count();\nSystem.out.println(count);"
+  },
+  {
+    "id": 29,
+    "question": "Return the array list having no empty strings from the given Array List",
+    "input": "List<String> strList = Arrays.asList(\"abc\", \"\", \"bcd\", \"\", \"defg\", \"jk\");",
+    "expectedOutput": "[abc, bcd, defg, jk]",
+    "solution": "List<String> filtered = strList.stream().filter(x -> !x.isEmpty()).collect(Collectors.toList());\nSystem.out.println(filtered);"
+  },
+  {
+    "id": 30,
+    "question": "Return the array list having strings with more than 2 characters in it from the given Array List",
+    "input": "List<String> strList = Arrays.asList(\"abc\", \"\", \"bc\", \"\", \"defg\", \"jk\");",
+    "expectedOutput": "[abc, defg]",
+    "solution": "filtered = strList.stream().filter(x -> x.length() > 2).collect(Collectors.toList());\nSystem.out.println(filtered);"
+  },
+  {
+    "id": 31,
+    "question": "Return a String generated from the values of given array list, concatenated with a command and space. Also, each value should be converted to upper case",
+    "input": "List<String> G7 = Arrays.asList(\"USA\", \"Japan\", \"France\", \"Germany\", \"Italy\", \"U.K.\", \"Canada\");",
+    "expectedOutput": "USA, JAPAN, FRANCE, GERMANY, ITALY, U.K., CANADA",
+    "solution": "String G7Countries = G7.stream().map(x -> x.toUpperCase()).collect(Collectors.joining(\", \"));\nSystem.out.println(G7Countries);"
+  },
+  {
+    "id": 32,
+    "question": "Create a list of squares of all distinct numbers from the given array list.",
+    "input": "List<Integer> numbers2 = Arrays.asList(9, 10, 3, 4, 7, 3, 4);",
+    "expectedOutput": "[81, 100, 9, 16, 49]",
+    "solution": "List<Integer> distinct = numbers2.stream().map(i -> i * i).distinct().collect(Collectors.toList());\nSystem.out.println(distinct);"
+  },
+  {
+    "id": 33,
+    "question": "Find the index of value = 6 in the given Array List using streams. You are not allowed to use any loops.",
+    "input": "int[] ints = {2, 6, 1, 22, 4, -6, 6, 30, 6, 9};",
+    "expectedOutput": "1",
+    "solution": "int index = IntStream.range(0, ints.length).filter(i -> ints[i] == value).findFirst().orElse(-1);\nSystem.out.println(index);"
+  },
+  {
+    "id": 34,
+    "question": "Find all the the indices of value = 6 in the given Array List using streams and return as an int[] array. You are not allowed to use any loops.",
+    "input": "int[] ints = {2, 6, 1, 22, 4, -6, 6, 30, 6, 9};",
+    "expectedOutput": "[1, 6, 8]",
+    "solution": "int[] indices = IntStream.range(0, ints.length).filter(i -> ints[i] == value).toArray();\nSystem.out.println(indices);"
+  },
+  {
+    "id": 35,
+    "question": "Find all the indices of value = 6 in the given Array List using streams and return as an Integer[] array. You are not allowed to use any loops.",
+    "input": "int[] ints = {2, 6, 1, 22, 4, -6, 6, 30, 6, 9};",
+    "expectedOutput": "[1, 6, 8]",
+    "solution": "Integer[] indices = IntStream.range(0, ints.length).filter(i -> ints[i] == value).boxed().toArray(Integer[]::new);\nSystem.out.println(indices);"
+  },
+  {
+    "id": 36,
+    "question": "Find all the indices of value = 6 in the given Array List using streams and return as an Integer[] array. You are not allowed to use any loops.",
+    "input": "int[] ints = {2, 6, 1, 22, 4, -6, 6, 30, 6, 9};",
+    "expectedOutput": "[1, 6, 8]",
+    "solution": "List<Integer> indices = IntStream.range(0, ints.length).filter(i -> ints[i] == value).boxed().collect(Collectors.toList());\nSystem.out.println(indices);"
+  },
+  {
+    "id": 37,
+    "question": "Remove the value at index 6 from the given Array List using streams and return as int[] array. You are not allowed to use any loops.",
+    "input": "int[] ints = {2, 6, 1, 22, 4, -6, 6, 30, 6, 9};",
+    "expectedOutput": "[2, 6, 1, 22, 4, -6, 30, 6, 9]",
+    "solution": "int[] updatedArray = IntStream.range(0, ints.length).filter(i -> i != value).map(i -> ints[i]).toArray();\nSystem.out.println(updatedArray);"
+  },
+  {
+    "id": 38,
+    "question": "Remove all occurences of 6 from the given Array List using streams and return as int[] array. You are not allowed to use any loops.",
+    "input": "int[] ints = {2, 6, 1, 22, 4, -6, 6, 30, 6, 9};",
+    "expectedOutput": "[2, 1, 22, 4, -6, 30, 9]",
+    "solution": "int[] updatedArray = IntStream.range(0, ints.length).filter(i -> ints[i] != value).map(i -> ints[i]).toArray();\nSystem.out.println(updatedArray);"
+  },
+  {
+    "id": 39,
+    "question": "Lambda Code Block Inside Stream Operations - Remove all occurences of 6 from the given Array List using streams and return as int[] array. You are not allowed to use any loops.",
+    "input": "List<Integer> numbers = Arrays.asList(7, 12, 9, 1, 5, 36, 87, 5, 8);",
+    "expectedOutput": "[81, 121, 9, 49, 7921, 49]",
+    "solution": "List<Integer> updatedList = numbers.stream()\n\t.filter(n -> { \n\t\t\tint modifiedValue = n + 1; \n\t\t\treturn modifiedValue % 2 == 0;})\n\t.map(n -> {\n\t\t\tint finalValue = n + 2;\n\t\t\treturn finalValue * finalValue;})\n\t.collect(Collectors.toList());\nSystem.out.println(updatedList);"
+  },
+  {
     "id": 40,
     "question": "Create a class called User with name, age and salary as its members. You must define a constructor for all these 3 members along with their getters and setters. You also need to have its toString() method overridden. The actual output should match the expected output presented to you under the Expected Output section.",
     "input": "List<User> users = Arrays.asList(\n\t\t\tnew User(\"C\", 30, 25000), \n\t\t\tnew User(\"D\", 40, 150000), \n\t\t\tnew User(\"A\", 10, 10000), \n\t\t\tnew User(\"B\", 20, 300000), \n\t\t\tnew User(\"E\", 50, 90000));",
@@ -26,5 +299,89 @@
     "input": "",
     "expectedOutput": "(Name=Hawk,Type=Bird,Weight=2.0,Height=0.6)",
     "solution": "var hawk = animals.stream().filter(i -> i.getName().equals(\"Hawk\")).findFirst();\nif (hawk.isPresent()) {print(hawk.get());}"
+  },
+  {
+    "id": 44,
+    "question": "Return all the animals sorted by height.",
+    "input": "",
+    "expectedOutput": "Penguin (0.5)\nHawk (0.6)\nHawk (0.6)\nEagle (0.8)\nSnake (1.0)\nDolphin (2.0)\nCrocodile (2.5)\nTiger (3.0)\nLion (3.5)\nGiraffe (5.5)\nElephant (10.0)",
+    "solution": "var smallestAnimalsFirst = animals.stream().sorted(Comparator.comparingDouble(i -> i.getHeight()));\nsmallestAnimalsFirst.forEach(i -> System.out.println(i.getName() + \" (\" + i.getHeight() + \")\"));"
+  },
+  {
+    "id": 45,
+    "question": "Create a new object from the stream of animals and store only name and type in that new object. Then return all animals with the expected output.",
+    "input": "",
+    "expectedOutput": "Name: Lion, Type: Mammal\nName: Elephant, Type: Mammal\nName: Penguin, Type: Bird\nName: Snake, Type: Reptile\nName: Dolphin, Type: Mammal\nName: Eagle, Type: Bird\nName: Tiger, Type: Mammal\nName: Crocodile, Type: Reptile\nName: Giraffe, Type: Mammal\nName: Hawk, Type: Bird\nName: Hawk, Type: Bird",
+    "solution": "var justNamesAndTypes = animals.stream().map(i -> new Object() { String name = i.getName(); String type = i.getType();});\njustNamesAndTypes.forEach(i -> System.out.println(\"Name: \" + i.name + \", Type: \" + i.type));"
+  },
+  {
+    "id": 46,
+    "question": "Return the smallest animal by height.",
+    "input": "",
+    "expectedOutput": "(Name=Penguin,Type=Bird,Weight=1.5,Height=0.5)",
+    "solution": "var smallestAnimal2 = animals.stream().min(Comparator.comparing(Animal::getHeight));\nif (smallestAnimal.isPresent()) {System.out.println(smallestAnimal.get());}"
+  },
+  {
+    "id": 47,
+    "question": "Return the largest animal by height.",
+    "input": "",
+    "expectedOutput": "(Name=Elephant,Type=Mammal,Weight=5000.0,Height=10.0)",
+    "solution": "var biggestAnimal = animals.stream().max(Comparator.comparing(Animal::getHeight));\nif (biggestAnimal.isPresent()) {System.out.println(biggestAnimal.get());}"
+  },
+  {
+    "id": 48,
+    "question": "Group the animals by their type and return the output as given in the expected output. Use the print() method to display",
+    "input": "",
+    "expectedOutput": "Mammal\nLion Elephant Dolphin Tiger Giraffe \nReptile\nSnake Crocodile \nBird\nPenguin Eagle Hawk Hawk",
+    "solution": "var groupsByType = animals.stream().collect(Collectors.groupingBy(i -> i.getType()));\nprint(groupsByType);"
+  },
+  {
+    "id": 49,
+    "question": "Return the sum of heights of all animals.",
+    "input": "",
+    "expectedOutput": "30.0",
+    "solution": "var sumHeight = animals().mapToDouble(i -> i.getHeight()).sum();\nSystem.out.println(sumHeight);"
+  },
+  {
+    "id": 50,
+    "question": "In the given animals, there are two Hawks. Return only one Hawk using streams.",
+    "input": "",
+    "expectedOutput": "(Name=Hawk,Type=Bird,Weight=2.0,Height=0.6)",
+    "solution": "var removedDuplicate = animals.stream().filter(i -> i.getName().equals(\"Hawk\")).distinct();\nSystem.out.println(removedDuplicate);"
+  },
+  {
+    "id": 51,
+    "question": "Return the name of the smallest Mammal by height.",
+    "input": "",
+    "expectedOutput": "Dolphin",
+    "solution": "var smallestMammal = animals.stream()\n\t\t.filter(i -> i.getType().equals(\"Mammal\"))\n\t\t.sorted(Comparator.comparingDouble(i -> i.getHeight()))\n\t\t.map(i -> i.getName())\n\t\t.findFirst();\nif (smallestAnimal.isPresent()) {print(smallestMammal.get());}"
+  },
+  {
+    "id": 52,
+    "question": "Return the name of the smallest animal of each type by height.",
+    "input": "",
+    "expectedOutput": "Mammal: Dolphin \nReptile: Snake Bird: Penguin",
+    "solution": "var smallestOfGroups = animals.stream()\n\t\t\t.collect(Collectors.groupingBy(i -> i.getType()))\n\t\t\t.entrySet()\n\t\t\t.stream()\n\t\t\t.map(i -> new Object() {\n\t\t\t\tString group = i.getKey();\n\t\t\t\tString smallest = i.getValue()\n\t\t\t\t\t.stream()\n\t\t\t\t\t.min(Comparator.comparingDouble(j -> j.getHeight()))\n\t\t\t\t\t.get()\n\t\t\t\t\t.getName();\n\t\t\t});\nsmallestOfGroups.forEach(i -> System.out.println(i.group + \":\" + i.smallest));"
+  },
+  {
+    "id": 53,
+    "question": "Return the sum of heights by each group.",
+    "input": "",
+    "expectedOutput": "Mammal: 24.0\nReptile: 3.5\nBird: 2.5",
+    "solution": "var sumEachGroup = animals.stream()\n\t\t\t.collect(Collectors.groupingBy(i -> i.getType()))\n\t\t\t.entrySet()\n\t\t\t.stream()\n\t\t\t.map(i -> new Object() {\n\t\t\t\tString group = i.getKey();\n\t\t\t\tDouble sum = i.getValue()\n\t\t\t\t\t.stream()\n\t\t\t\t\t.mapToDouble(j -> j.getHeight())\n\t\t\t\t\t.sum();\n\t\t\t});\nsumEachGroup.forEach(i -> System.out.println(i.group + \": \" + i.sum));"
+  },
+  {
+    "id": 54,
+    "question": "Return the animals that contain 'in' in their names, sorted by height",
+    "input": "",
+    "expectedOutput": "Penguin\nDolphin",
+    "solution": "animals.stream().filter(i -> i.getName().toLowerCase().contains(\"in\")).sorted(Comparator.comparingDouble(i -> i.getHeight())).forEach(i -> System.out.println(i.getName()));"
+  },
+  {
+    "id": 55,
+    "question": "Return the names of the mammals with weight over 100",
+    "input": "",
+    "expectedOutput": "Lion\nElephant\nDolphin\nTiger\nGiraffe",
+    "solution": "animals.stream().filter(i -> i.getType().equals(\"Mammal\")).filter(i -> i.getWeight() > 100.0).map(i -> i.getName()).forEach(System.out::println);"
   }
 ]
