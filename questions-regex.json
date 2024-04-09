@@ -1,9 +1,9 @@
 [
   {
     "id": 1,
-    "question": "Return the given int[] as Integer[] using streams.",
-    "input": "int[] array = {1, 2, 3, 4, 5};",
-    "expectedOutput": "[1, 2, 3, 4, 5] has Data Type: Integer[]",
+    "question": "Complete the code such that it checks every string in the given input and returns true or false as compared to expected output.",
+    "input": "List<String> inputs = Arrays.asList(\"java\", \"Java\", \"JAva\", \"1ava\");",
+    "expectedOutput": "false\ntrue\ntrue\nfalse",
     "solution": "Integer[] bOutput = Arrays.stream(a).boxed().toArray(Integer[]::new);\nSystem.out.println(Arrays.toString(bOutput) + \" has Data Type: \" + bOutput.getClass().getSimpleName());"
   }
 ]
