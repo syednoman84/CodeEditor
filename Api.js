@@ -1,3 +1,4 @@
+const filePath = "./questions-regex.json";
 const express = require("express");
 const app = express();
 const bodyP = require("body-parser");
@@ -30,14 +31,14 @@ app.get("/get-all-questions", function (req, res) {
   var fs = require("fs");
 
   // reads the questions.json file and send back
-  res.send(JSON.parse(fs.readFileSync("./questions.json")));
+  res.send(JSON.parse(fs.readFileSync(filePath)));
 });
 
 app.get("/get-one-random-question", function (req, res) {
   var fs = require("fs");
 
   // reads the questions.json file
-  var questions = JSON.parse(fs.readFileSync("./questions.json"));
+  var questions = JSON.parse(fs.readFileSync(filePath));
 
   // returns one question randomly
   res.send(questions[Math.floor(Math.random() * questions.length)]);

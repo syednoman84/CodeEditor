@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "question": "Return the given int[] as Integer[] using streams.",
+    "input": "int[] array = {1, 2, 3, 4, 5};",
+    "expectedOutput": "[1, 2, 3, 4, 5] has Data Type: Integer[]",
+    "solution": "Integer[] bOutput = Arrays.stream(a).boxed().toArray(Integer[]::new);\nSystem.out.println(Arrays.toString(bOutput) + \" has Data Type: \" + bOutput.getClass().getSimpleName());"
+  }
+]
