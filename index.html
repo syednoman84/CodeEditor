@@ -279,13 +279,13 @@ public class Main {
     })
     editor.setSize(0.7 * width, "900")
 
-    fp = {
-            filePath: "streams"
-    }
-
     // fp = {
-    //         filePath: "regex"
+    //         filePath: "streams"
     // }
+
+    fp = {
+            filePath: "regex"
+    }
     
     window.onload = async () => {
         let promiseData = await promiseOfFetch;
@@ -323,7 +323,7 @@ public class Main {
 
         qText.innerHTML = question.question;
         
-        if(question.id >= 41 && question.id <=55){
+        if(fp.filePath == "streams" && question.id >= 41 && question.id <=55){
             editor.getDoc().setValue(animalClassTemplate);    
         } else{
             editor.getDoc().setValue(editorTemplateStart + "\t" + question.input + editorTemplateEnd);
@@ -351,7 +351,7 @@ public class Main {
         } else {
             qText.innerHTML = counter + 1 + ". " + questions[counter].question;
             
-            if(questions[counter].id >= 41 && questions[counter].id <=55){
+            if(fp.filePath == "streams" && questions[counter].id >= 41 && questions[counter].id <=55){
                 editor.getDoc().setValue(animalClassTemplate);    
             } else{
                 editor.getDoc().setValue(editorTemplateStart + "\t" + questions[counter].input + editorTemplateEnd);

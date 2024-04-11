@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "question": "Using regex, complete the code such that it checks every string in the given input and returns true or false as compared to expected output.",
+    "input": "List<String> inputs = Arrays.asList(\"java\", \"Java\", \"JAva\", \"1ava\");",
+    "expectedOutput": "false\ntrue\ntrue\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"^J..a$\")));"
+  },
+  {
+    "id": 2,
+    "question": "Using regex, complete the code such that it checks every string in the given input and returns true or false as compared to expected output.",
+    "input": "List<String> inputs = Arrays.asList(\"123a\", \"98416\", \"98 41\", \"1ava\", \"1\");",
+    "expectedOutput": "false\ntrue\nfalse\nfalse\ntrue",
+    "solution": "inputs.forEach(str -> System.out.println(str.matches(\"^[0-9]+$\")));"
+  },
+  {
+    "id": 3,
+    "question": "Using regex, complete the code such that it checks every string in the given input and returns true or false as compared to expected output.",
+    "input": "List<String> inputs = Arrays.asList(\"Java123is456fun\", \"+a-+b\");",
+    "expectedOutput": "Java is fun\n+a-+b",
+    "solution": "inputs.forEach(str -> System.out.println(str.replaceAll(\"\\\\d+\", \" \")));"
+  },
+  {
+    "id": 4,
+    "question": "Write a regex to replace first occurence of all digits with empty space as compared to expected output.",
+    "input": "List<String> inputs = Arrays.asList(\"Learn223Java55@\");",
+    "expectedOutput": "Learn Java55@",
+    "solution": "inputs.forEach(str -> System.out.println(str.replaceFirst(\"\\\\d+\", \" \")));"
+  },
+  {
+    "id": 5,
+    "question": "Write a regex to replace all occurences of + (plus sign) with # (hash sign) as compared to expected output.",
+    "input": "List<String> inputs = Arrays.asList(\"+a-+b\");",
+    "expectedOutput": "#a-#b",
+    "solution": "inputs.forEach(str -> System.out.println(str.replace(\"+\", \"#\")));"
+  },
+  {
+    "id": 6,
+    "question": "Convert the given String into array such that all individual words become array elements as compared to expected output.",
+    "input": "String str = \"Java is a fun programming language\";",
+    "expectedOutput": "[Java, is, a, fun, programming, language]",
+    "solution": "System.out.println(Arrays.toString(str.split(\" \")));"
+  },
+  {
+    "id": 7,
+    "question": "Map first 3 words of the given String to first 3 elements of String Array and remaining words should become the 4th element of that array as compared to expected output.",
+    "input": "String str = \"Java is a fun programming language\";",
+    "expectedOutput": "[Java, is, a, fun programming language]",
+    "solution": "System.out.println(Arrays.toString(str.split(\" \", 4)));"
+  },
+  {
+    "id": 8,
+    "question": "Using regex, complete the code such that it checks every string in the given input and returns true or false as compared to expected output.",
+    "input": "List<String> inputs = Arrays.asList(\"xyz\", \"wW\", \"w\", \"W\");",
+    "expectedOutput": "false\nfalse\ntrue\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[wW]\")));"
+  },
+  {
+    "id": 9,
+    "question": "Write a regex to validate if a string starts with (d or D) and ends with \"agmar\"",
+    "input": "List<String> inputs = Arrays.asList(\"dagmar\", \"Dagmar\", \"dDagmar\", \"Wagmar\", \"dAgMar\");",
+    "expectedOutput": "true\ntrue\nfalse\nfalse\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[dD]agmar\")));"
+  },
+  {
+    "id": 10,
+    "question": "Write a regex to validate if a string starts with (a, b or c), followed by d and ends with (E or F or G)",
+    "input": "List<String> inputs = Arrays.asList(\"adE\", \"cdG\", \"bdF\", \"aE\", \"adg\", \"dEF\");",
+    "expectedOutput": "true\ntrue\ntrue\nfalse\nfalse\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[abc]d[EFG]\")));"
+  }
+]
