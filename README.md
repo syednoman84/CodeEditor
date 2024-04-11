@@ -1,4 +1,5 @@
 # Steps to run the project
+
 1. Update the directory path to your local directories as shown below for the app.use and res.sendFile:
    <img width="369" alt="image" src="https://github.com/syednoman84/CodeEditor/assets/24880733/1a299fa6-2123-4866-82e8-9f645ef4bb14">
 
@@ -14,8 +15,14 @@ Note that this repo already has the codemirror library as codemirror-5.65.16 par
 
 ![image](https://github.com/syednoman84/CodeEditor/assets/24880733/129c48b0-9e09-4a98-b16b-22a61e0fcffa)
 
+## Streams vs Regex Questions
+
+- You have the capability of running questions for either Streams or Regex.
+- There are two different questions files in the repo. One called questions-regex.json and the other is called questions-streams.json
+- In index.html, before the window.onload function, you have to comment one to set the filepath to the one you want and then the questions from the uncommented one will be used.
 
 ## Working code that you can copy and paste in the editor
+
 ```java
 import java.util.*;
 import java.util.stream.Collectors;
@@ -34,7 +41,7 @@ public class Main {
       List<List<String>> collection = asList(asList("Viktor", "Farcic"), asList("John", "Doe", "Third"));
       System.out.println(collection.stream().flatMap(Collection::stream).collect(toList()));
       System.out.println(collection.stream().flatMap(Collection::stream).collect(Collectors.toList()));
-      
+
        // Custom object of User type
         List<User> users = Arrays.asList(
                 new User("C", 30, 25000),
@@ -76,7 +83,7 @@ public class Main {
 
 
     }
-  
+
   public static int sum(int a, int b){
     return a + b;
   }
@@ -129,4 +136,3 @@ class User {
     }
 }
 ```
-

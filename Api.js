@@ -1,9 +1,9 @@
-const filePath = "./questions-regex.json";
 const express = require("express");
 const app = express();
 const bodyP = require("body-parser");
 const compiler = require("compilex");
 const options = { stats: true };
+var filePath;
 
 compiler.init(options);
 
@@ -15,20 +15,14 @@ app.use(
 );
 
 app.get("/", function (req, res) {
-  // compiler.flush(function () {
-  //   console.log("deleted");
-  // });
   res.sendFile("C:/Noman/code/github/CodeEditor/index.html");
 });
 
-// app.get("/get-count", function (req, res) {
-//   var fs = require("fs");
-//   var questions = JSON.parse(fs.readFileSync("./questions.json"));
-//   res.send(questions.length);
-// });
-
-app.get("/get-all-questions", function (req, res) {
+app.post("/get-all-questions", function (req, res) {
   var fs = require("fs");
+  const regexfilePath = "./questions-regex.json";
+  const streamsfilePath = "./questions-streams.json";
+  filePath = req.body.filePath == "streams" ? streamsfilePath : regexfilePath;
 
   // reads the questions.json file and send back
   res.send(JSON.parse(fs.readFileSync(filePath)));

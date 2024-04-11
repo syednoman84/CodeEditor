@@ -59,21 +59,6 @@
             text-decoration: none;
             cursor: pointer;
         }
-
-        .parent {
-            /* border: 1px solid black; */
-            /* margin: 1rem; */
-            /* padding: 2rem 2rem; */
-            /* text-align: left; */
-        }
-
-        .child {
-            /* display: inline-block;
-            font-weight: bold; */
-            
-        }
-
-        
     </style>
 </head>
 
@@ -268,7 +253,6 @@ public class Main {
 
     var totalQuestions = document.getElementById("totalQuestions")
     var btnFetch = document.getElementById("btnFetch")
-    // var btnFetchAll = document.getElementById("btnFetchAll")
     var btnNext = document.getElementById("btnNext")
     var qText = document.getElementById("qText")
     var editorText = document.getElementById("editor")
@@ -283,8 +267,9 @@ public class Main {
     var question;
     var questions = [];
     var counter = 0;
+    var fp = {};
+    var solution = document.getElementById("solution");
 
-    
     var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
         mode: "text/x-c++src",
         theme: "dracula",
@@ -293,48 +278,36 @@ public class Main {
 
     })
     editor.setSize(0.7 * width, "900")
-    
-    // modal script
-    var modal = document.getElementById("myModal");
-    var btn = document.getElementById("btnSolution");
-    var span = document.getElementsByClassName("close")[0];
 
+    fp = {
+            filePath: "streams"
+    }
+
+    // fp = {
+    //         filePath: "regex"
+    // }
+    
     window.onload = async () => {
         let promiseData = await promiseOfFetch;
         questions = promiseData;
         totalQuestions.innerHTML = "Total Questions: " + promiseData.length;
     };
-
-    const promiseOfFetch = fetch("http://localhost:8000/get-all-questions")
+    
+    const promiseOfFetch = fetch("http://localhost:8000/get-all-questions",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                filePath : fp.filePath
+            })
+        })
                                 .then(r => r.json())
                                 .then(data => { 
                                     return data;
                                 });
     
-    // Fetch All button Click Event Listener
-    // btnFetchAll.addEventListener("click", async function () {
-    //     var solution = document.getElementById("solution")
-
-    //     var qData = await fetch("http://localhost:8000/get-all-questions")
-    //     questions = await qData.json()
-    //     qText.innerHTML = counter + ". " + questions[0].question;
-        
-    //     if(questions[0].id >= 41 && questions[0].id <=55){
-    //         editor.getDoc().setValue(animalClassTemplate);    
-    //     } else{
-    //         editor.getDoc().setValue(editorTemplateStart + "\t" + questions[0].input + editorTemplateEnd);
-    //     }
-        
-    //     expectedOutput.value = questions[0].expectedOutput;
-    //     solution.innerHTML = questions[0].solution;
-    //     output.value = "";
-    //     resultLabel.innerText ="....";
-    //     resultDiv.style.backgroundColor="black";
-    //     counter=1;
-
-
-    // })
-
+    
     // Fetch Random One button Click Event Listener
     btnFetch.addEventListener("click", async function () {
         var solution = document.getElementById("solution")
@@ -364,12 +337,9 @@ public class Main {
 
 
     })
-
     
     // Next Question button Click Event Listener
     btnNext.addEventListener("click", async function () {
-        var solution = document.getElementById("solution");
-
         if(counter >= questions.length){
             qText.innerHTML = "No more questions are available. Please restart with Random One or Start/Next buttons.";
             editor.getDoc().setValue("");
@@ -424,6 +394,11 @@ public class Main {
          }
     })
 
+    // modal script
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("btnSolution");
+    var span = document.getElementsByClassName("close")[0];
+
     // Supporting functions for Solutions modal
     btn.onclick = function() {
         modal.style.display = "block";
@@ -452,5 +427,4 @@ public class Main {
         }
     })
 </script>
-
 </html>
