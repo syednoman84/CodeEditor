@@ -1,9 +1,9 @@
 [
   {
-    "id": 10,
-    "question": "Write a regex to validate if a string starts with (a, b or c), followed by d and ends with (E or F or G)",
-    "input": "List<String> inputs = Arrays.asList(\"adE\", \"cdG\", \"bdF\", \"aE\", \"adg\", \"dEF\");",
-    "expectedOutput": "true\ntrue\ntrue\nfalse\nfalse\nfalse",
-    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[abc]d[EFG]\")));"
+    "id": 48,
+    "question": "Write a regular expression to not accept the string if it has a letter \"a\" followed by letter \"b\"",
+    "input": "List<String> inputs = Arrays.asList(\"This is aburn\", \"This is ashburn\");",
+    "expectedOutput": "false\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\".*a(?!b).*\"))); "
   }
 ]
