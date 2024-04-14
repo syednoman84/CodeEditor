@@ -120,6 +120,7 @@ import java.util.stream.Collectors;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {    
@@ -230,8 +231,9 @@ public class Main {
     public static void print(Map<String, List<Animal>> animals) {
         animals.forEach((key, value) -> {
             print(key + "");
+            print("\\n");  
             print(value);
-            print("");
+            print("\\n");
         });
     }
 
@@ -279,13 +281,13 @@ public class Main {
     })
     editor.setSize(0.7 * width, "900")
 
-    // fp = {
-    //         filePath: "streams"
-    // }
-
     fp = {
-            filePath: "regex"
+             filePath: "streams"
     }
+
+    //fp = {
+    //        filePath: "regex"
+    //}
     
     window.onload = async () => {
         let promiseData = await promiseOfFetch;
