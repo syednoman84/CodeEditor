@@ -1,9 +1,359 @@
 [
   {
+    "id": 1,
+    "question": "Using regex, complete the code such that it checks every string in the given input and returns true or false as compared to expected output.",
+    "input": "List<String> inputs = Arrays.asList(\"java\", \"Java\", \"JAva\", \"1ava\");",
+    "expectedOutput": "false\ntrue\ntrue\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"^J..a$\")));"
+  },
+  {
+    "id": 2,
+    "question": "Using regex, complete the code such that it checks every string in the given input and returns true or false as compared to expected output.",
+    "input": "List<String> inputs = Arrays.asList(\"123a\", \"98416\", \"98 41\", \"1ava\", \"1\");",
+    "expectedOutput": "false\ntrue\nfalse\nfalse\ntrue",
+    "solution": "inputs.forEach(str -> System.out.println(str.matches(\"^[0-9]+$\")));"
+  },
+  {
+    "id": 3,
+    "question": "Using regex, complete the code such that it checks every string in the given input and returns true or false as compared to expected output.",
+    "input": "List<String> inputs = Arrays.asList(\"Java123is456fun\", \"+a-+b\");",
+    "expectedOutput": "Java is fun\n+a-+b",
+    "solution": "inputs.forEach(str -> System.out.println(str.replaceAll(\"\\\\d+\", \" \")));"
+  },
+  {
+    "id": 4,
+    "question": "Write a regex to replace first occurence of all digits with empty space as compared to expected output.",
+    "input": "List<String> inputs = Arrays.asList(\"Learn223Java55@\");",
+    "expectedOutput": "Learn Java55@",
+    "solution": "inputs.forEach(str -> System.out.println(str.replaceFirst(\"\\\\d+\", \" \")));"
+  },
+  {
+    "id": 5,
+    "question": "Write a regex to replace all occurences of + (plus sign) with # (hash sign) as compared to expected output.",
+    "input": "List<String> inputs = Arrays.asList(\"+a-+b\");",
+    "expectedOutput": "#a-#b",
+    "solution": "inputs.forEach(str -> System.out.println(str.replace(\"+\", \"#\")));"
+  },
+  {
+    "id": 6,
+    "question": "Convert the given String into array such that all individual words become array elements as compared to expected output.",
+    "input": "String str = \"Java is a fun programming language\";",
+    "expectedOutput": "[Java, is, a, fun, programming, language]",
+    "solution": "System.out.println(Arrays.toString(str.split(\" \")));"
+  },
+  {
+    "id": 7,
+    "question": "Map first 3 words of the given String to first 3 elements of String Array and remaining words should become the 4th element of that array as compared to expected output.",
+    "input": "String str = \"Java is a fun programming language\";",
+    "expectedOutput": "[Java, is, a, fun programming language]",
+    "solution": "System.out.println(Arrays.toString(str.split(\" \", 4)));"
+  },
+  {
+    "id": 8,
+    "question": "Using regex, complete the code such that it checks every string in the given input and returns true or false as compared to expected output.",
+    "input": "List<String> inputs = Arrays.asList(\"xyz\", \"wW\", \"w\", \"W\");",
+    "expectedOutput": "false\nfalse\ntrue\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[wW]\")));"
+  },
+  {
+    "id": 9,
+    "question": "Write a regex to validate if a string starts with (d or D) and ends with \"agmar\"",
+    "input": "List<String> inputs = Arrays.asList(\"dagmar\", \"Dagmar\", \"dDagmar\", \"Wagmar\", \"dAgMar\");",
+    "expectedOutput": "true\ntrue\nfalse\nfalse\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[dD]agmar\")));"
+  },
+  {
+    "id": 10,
+    "question": "Write a regex to validate if a string starts with (a, b or c), followed by d and ends with (E or F or G)",
+    "input": "List<String> inputs = Arrays.asList(\"adE\", \"cdG\", \"bdF\", \"aE\", \"adg\", \"dEF\");",
+    "expectedOutput": "true\ntrue\ntrue\nfalse\nfalse\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[abc]d[EFG]\")));"
+  },
+  {
+    "id": 11,
+    "question": "Write a regex to validate if a string starts with \"tag\" followed by (space or hyphen but not both) and ends with \"line\"",
+    "input": "List<String> inputs = Arrays.asList(\"tag line\", \"tag-line\", \"tag- line\", \"tag -line\");",
+    "expectedOutput": "true\ntrue\nfalse\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"tag[- ]line\")));"
+  },
+  {
+    "id": 12,
+    "question": "Write a regex to validate if a string matches exactly with [dog]",
+    "input": "List<String> inputs = Arrays.asList(\"[dog]\", \"dog]\", \"[dog\", \"[ dog ]\");",
+    "expectedOutput": "true\nfalse\nfalse\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"\\\\[dog\\\\]\")));"
+  },
+  {
+    "id": 13,
+    "question": "Write a regex to validate if a string is a single digit number.",
+    "input": "List<String> inputs = Arrays.asList(\"dog\", \"6\", \"8a\", \"9\", \"23\");",
+    "expectedOutput": "false\ntrue\nfalse\ntrue\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[0-9]\")));"
+  },
+  {
+    "id": 14,
+    "question": "Write a regex to validate if a string is a 2-digit number.",
+    "input": "List<String> inputs = Arrays.asList(\"dog\", \"6\", \"8a\", \"9\", \"23\");",
+    "expectedOutput": "false\nfalse\nfalse\nfalse\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[0-9][0-9]\")));"
+  },
+  {
+    "id": 15,
+    "question": "Write a regex to validate if a string is a 2-digit number and each digit must be between 0 and 3 inclusively.",
+    "input": "List<String> inputs = Arrays.asList(\"33\", \"26\", \"8a\", \"9\", \"23\", \"99\", \"11\");",
+    "expectedOutput": "true\nfalse\nfalse\nfalse\ntrue\nfalse\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[0-3][0-3]\")));"
+  },
+  {
+    "id": 16,
+    "question": "Write a regex to validate if a string is a 2-letter string where first letter is always an alphabet and second letter is a 1-digit number.",
+    "input": "List<String> inputs = Arrays.asList(\"33\", \"26\", \"8a\", \"A9\", \"z3\", \"q9\", \"pp\");",
+    "expectedOutput": "false\nfalse\nfalse\ntrue\ntrue\ntrue\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[A-Za-z][0-9]\")));"
+  },
+  {
+    "id": 17,
+    "question": "Write a regex to validate if a string is a 3-letter string where first and last letter cannot be a vowel and second letter has to be vowel.",
+    "input": "List<String> inputs = Arrays.asList(\"bat\", \"rat\", \"boy\", \"doe\", \"joe\", \"kim\", \"joe\");",
+    "expectedOutput": "true\ntrue\ntrue\nfalse\nfalse\ntrue\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[^aeiou][aeiou][^aeiou]\")));"
+  },
+  {
+    "id": 18,
+    "question": "Write a regex to validate if a string is a 2-letter string where both letters are \"bc\" or if it is a 3-letter string then the first letter can only be \"a\" and last two letters have to be \"bc\" only.",
+    "input": "List<String> inputs = Arrays.asList(\"bbc\", \"bc\", \"abc\", \"abb\", \"abcd\", \"bcd\");",
+    "expectedOutput": "false\ntrue\ntrue\nfalse\nfalse\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"a?bc\")));"
+  },
+  {
+    "id": 19,
+    "question": "Write a regex to validate if a string is a  1-letter or 2-letter string. If its a 1-letter string, that letter must be number. If its a 2-letter string, then first letter must be an alphabet and second letter must be a number.",
+    "input": "List<String> inputs = Arrays.asList(\"9\", \"9a\", \"a7\", \"ab7\", \"87\", \"cd\", \"a\");",
+    "expectedOutput": "true\nfalse\ntrue\nfalse\nfalse\nfalse\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[a-z]?[1-9]\")));"
+  },
+  {
+    "id": 20,
+    "question": "Write a regex to validate if a string is a  1-letter or 2-letter or 3-letter string. All of letters must be a number.",
+    "input": "List<String> inputs = Arrays.asList(\"9\", \"9a\", \"a7\", \"ab7\", \"87\", \"cd\", \"a\", \"007\", \"55\", \"99\");",
+    "expectedOutput": "true\nfalse\nfalse\nfalse\ntrue\nfalse\nfalse\ntrue\ntrue\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[0-9]?[0-9]?[1-9]\")));"
+  },
+  {
+    "id": 21,
+    "question": "Write a regex to validate if a string is empty or contains ONLY letter \"a\". No restriction on string length meaning it can have 1 or multiple letter \"a\". For example a and aaaaaa are both valid strings",
+    "input": "List<String> inputs = Arrays.asList(\"\", \"a\", \"a7\", \"ab7\", \"87\", \"aa\", \"aaaa\", \"aaaaaaaaaa\", \"  \", \"aab\");",
+    "expectedOutput": "true\ntrue\nfalse\nfalse\nfalse\ntrue\ntrue\ntrue\nfalse\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"a*\")));"
+  },
+  {
+    "id": 22,
+    "question": "Write a regex to validate if a string starts with letter b and ends with zero or more letter a. For example, b, ba and baaaa are all valid strings.",
+    "input": "List<String> inputs = Arrays.asList(\"\", \"a\", \"b\", \"ab\", \"ba\", \"bba\", \"baaa\", \"aaaaaaaaaa\", \"baaaaaaaa\", \"abaaaaa\");",
+    "expectedOutput": "false\nfalse\ntrue\nfalse\ntrue\nfalse\ntrue\nfalse\ntrue\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"ba*\")));"
+  },
+  {
+    "id": 23,
+    "question": "Write a regex to validate that the given string only contains either a or b but not both. There can be zero or more letters in the string. For example, empty string, a, b, aaaaaa, bbbbbb are all valid strings but aaabbb is not valid because it has both a and b.",
+    "input": "List<String> inputs = Arrays.asList(\"\", \"a\", \"b\", \"ab\", \"ba\", \"bba\", \"baaa\", \"aaaaaaaaaa\", \"baaaaaaaa\", \"abaaaaa\", \"bbbbbb\");",
+    "expectedOutput": "true\ntrue\ntrue\nfalse\nfalse\nfalse\nfalse\ntrue\nfalse\nfalse\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"a*|b*\")));"
+  },
+  {
+    "id": 24,
+    "question": "Write a regex to validate that the given string only contains either a or b or both. There can be zero or more of these letters in the string. For example, empty string, a, b, ,aaabb, bbaaaa, ab, ba, aaaaaa, bbbbbb are all valid strings but aaabbb is not valid because it has both a and b.",
+    "input": "List<String> inputs = Arrays.asList(\"\", \"a\", \"b\", \"ab\", \"ba\", \"bba\", \"baaa\", \"aaaaaaaaaa\", \"baaaaaaaa\", \"abaaaaa\", \"bbbbbb\", \"aaabb\", \"abc\");",
+    "expectedOutput": "true\ntrue\ntrue\ntrue\ntrue\ntrue\ntrue\ntrue\ntrue\ntrue\ntrue\ntrue\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[ab]*\")));"
+  },
+  {
+    "id": 25,
+    "question": "Write a regex to validate that the given string must start with one or more capital letters from A to Z followed by one or more vowels and must end there; or end with either letter b or d.",
+    "input": "List<String> inputs = Arrays.asList(\"\", \"beed\", \"Beed\", \"greed\", \"Greed\", \"Zeeeeee\", \"Zeeeeeep \");",
+    "expectedOutput": "false\nfalse\ntrue\nfalse\nfalse\ntrue\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[A-Z]+[aeiou]+[bd]?\")));"
+  },
+  {
+    "id": 26,
+    "question": "Write a regex to validate that the given string is a 1-character string and that character can be anything like alphabets, numbers or special characters",
+    "input": "List<String> inputs = Arrays.asList(\"\", \" \", \".\", \"g\", \"5\", \"&\", \"#\", \"#!\");",
+    "expectedOutput": "false\ntrue\ntrue\ntrue\ntrue\ntrue\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\".\")));"
+  },
+  {
+    "id": 27,
+    "question": "Write a regex to validate that the given string is a 2-character string and those character can be anything like alphabets, numbers or special characters",
+    "input": "List<String> inputs = Arrays.asList(\"\", \" \", \".\", \"g\", \"5\", \"&\", \"#\", \"#!\", \"\", \"  \", \"..\", \"g4\", \"5g\", \"&#\", \"#*\", \"#!\");",
+    "expectedOutput": "false\nfalse\nfalse\nfalse\nfalse\nfalse\nfalse\ntrue\nfalse\ntrue\ntrue\ntrue\ntrue\ntrue\ntrue\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"..\")));"
+  },
+  {
+    "id": 28,
+    "question": "Write a regex to validate that the given string starts and ends with a number and can have anything in the middle with no restriction on string length",
+    "input": "List<String> inputs = Arrays.asList(\"1234.@#$sdfss6\", \" \", \".\", \"g6546\", \"87985\", \"sdfsd2432\", \"32234sdfsd\", \"2y3\");",
+    "expectedOutput": "true\nfalse\nfalse\nfalse\ntrue\nfalse\nfalse\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[0-9]+.*[0-9]+\")));"
+  },
+  {
+    "id": 29,
+    "question": "Write a regex to validate if a given string has a word \"blue\" anywhere in it.",
+    "input": "List<String> inputs = Arrays.asList(\"sklfjlsj @#$3243 bluesld034)(&(&342\", \" \", \".\", \"g6546\", \"blue color\", \"my favorite color is blue\");",
+    "expectedOutput": "true\nfalse\nfalse\nfalse\ntrue\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\".*blue.*\")));"
+  },
+  {
+    "id": 30,
+    "question": "Write a regex to validate if a given string exactly matches cat or dog but not both.",
+    "input": "List<String> inputs = Arrays.asList(\"cat\", \"dog\", \"catdog\", \"dogcat\", \"abc\");",
+    "expectedOutput": "true\ntrue\nfalse\nfalse\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"cat|dog\")));"
+  },
+  {
+    "id": 31,
+    "question": "Write a regex to validate if a given string (has one or more occurences of a, b or c at the beginning and zero of more occurences of 1, 2 or 3) OR (has one or more occurences of d, e or f at the beginning and zero of more occurences of 4, 5 or 6)",
+    "input": "List<String> inputs = Arrays.asList(\"\", \"abc\", \"123\", \"a1\", \"b1\", \"c4\", \"d1\", \"d4\", \"456\", \"def\");",
+    "expectedOutput": "false\ntrue\nfalse\ntrue\ntrue\nfalse\nfalse\ntrue\ntrue\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[abc]+[123]*|[def]*[456]+\")));"
+  },
+  {
+    "id": 32,
+    "question": "Write a regex to validate if a given string matches exactly with \"cat eyes\" or \"dog eyes\" or \"snake eyes\" or \"eagle eyes\"",
+    "input": "List<String> inputs = Arrays.asList(\"eyes\", \"eagle eyes\", \"bird eyes\", \"cat eyes\", \"Dog eyes\", \"snake eyes\", \"Cat Eyes\");",
+    "expectedOutput": "false\ntrue\nfalse\ntrue\nfalse\ntrue\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"(cat|snake|dog|eagle) eyes\")));"
+  },
+  {
+    "id": 33,
+    "question": "Write a regex to validate if a given string matches exactly with Porkchop or porkchop or Porkchops or porkchops Lambchop or lambchop or Lambchops or lambchops",
+    "input": "List<String> inputs = Arrays.asList(\"Porkchop\", \"porkchop\", \"Porkchops\", \"porkchops\", \"Lambchop\", \"lambchop\", \"Lambchops\", \"lambchops\", \"LambChop\", \"lambChop\", \"LambChops\", \"lambChops\");",
+    "expectedOutput": "true\ntrue\ntrue\ntrue\nfalse\nfalse\nfalse\nfalse\nfalse\nfalse\nfalse\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"([pP]ork|[lL]amb])chops?\")));"
+  },
+  {
+    "id": 34,
+    "question": "Write a regex to validate a price tag. Examples of valid price tags are $19.00, $19.33, $19, $0.33, $1.33. Examples of invalid price tags are 19.00, $19.0, $.33, $0.3, $19.333, 0.33",
+    "input": "List<String> inputs = Arrays.asList(\"$19.00\", \"$19.33\", \"$19.0\", \"19.33\", \"$19\", \"$19.3\", \"$0.33\", \"0.33\", \"$0.3\", \"$19.333\", \"$1.33\");",
+    "expectedOutput": "true\ntrue\nfalse\nfalse\ntrue\nfalse\ntrue\nfalse\nfalse\nfalse\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"\\\\$(0|[1-9][0-9]*)(\\\\.[0-9][0-9])?\")));"
+  },
+  {
+    "id": 35,
+    "question": "Write a regex to validate that a string has 3 capital letter P together in a given string anywhere.",
+    "input": "List<String> inputs = Arrays.asList(\"This string does not have 3 Ps\", \"PPP are there at the beginning\", \"the 3 PPPs are in the middle\", \"and the 3 ps are at the end PPP\");",
+    "expectedOutput": "false\ntrue\ntrue\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\".*P{3}.*\")));"
+  },
+  {
+    "id": 36,
+    "question": "Write a regex to validate a phone number. A phone number is valid if if (starts with 1 or +1 or 001) AND (next digit is from 2 to 9) AND (ends with 9 digits from 0 to 9).",
+    "input": "List<String> inputs = Arrays.asList(\"15719995259\", \"+15719995259\", \"0015719995259\", \"5719995259\", \"+25719995259\", \"+10009995259\");",
+    "expectedOutput": "true\ntrue\ntruefalse\nfalse\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"(1|\\\\+1|001)[2-9][0-9]{9}\")));"
+  },
+  {
+    "id": 37,
+    "question": "Write a regex to validate that word cricket exists 3 times in a given string anywhere.",
+    "input": "List<String> inputs = Arrays.asList(\"I have cricket only one time\", \"I play cricket and wants to play cricket and will play cricket\", \"cricket is just cricket nothing else\", \"cricketcricketcricket\", \"cricketcricket\", \"cricket cricket cricket\");",
+    "expectedOutput": "false\ntrue\nfalse\ntrue\nfalse\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"(.*cricket.*){3}\")));"
+  },
+  {
+    "id": 38,
+    "question": "Write a regex to validate that word cricket exists 3 times together in a given string anywhere. For example I love cricketcricketcricket is a valid string.",
+    "input": "List<String> inputs = Arrays.asList(\"I have cricketcricketcricket together\", \"I play cricket and wants to play cricket and will play cricket\");",
+    "expectedOutput": "true\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\".*(cricket){3}.*\")));"
+  },
+  {
+    "id": 39,
+    "question": "Write a regex to validate that word cricket exists atleast 2 times together in a given string anywhere. For example \"I love cricketcricket as a game\" is a valid string.",
+    "input": "List<String> inputs = Arrays.asList(\"I have cricketcricketcricket together\", \"I play cricket and wants to play cricket and will play cricket\", \"you dont know cricketcricket more than me\", \"I only have one cricket word\");",
+    "expectedOutput": "true\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\".*(cricket){2,}.*\")));"
+  },
+  {
+    "id": 40,
+    "question": "Write a regex to validate that the string has 2 or more occurences of X or Y at the beginning followed by 0 or more s letter followed by zero or up to three capital letter Z",
+    "input": "List<String> inputs = Arrays.asList(\"XYXssZ\", \"XssZ\", \"XXZ\", \"XX\", \"XXXXXZZZ\", \"XXXXXssssZZZZ\");",
+    "expectedOutput": "true\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"[XY]{2,5}s*Z{0,3}\")));"
+  },
+  {
+    "id": 41,
+    "question": "Write a regex to validate that if a string has word ant before X then it must have ant after X as well. The string is also valid for similar pattern for words bat and cat as well around the X.",
+    "input": "List<String> inputs = Arrays.asList(\"ant\", \"bat\", \"cat\", \"antXant\", \"batXbat\", \"catXcat\", \"antXbat\", \"catXbat\");",
+    "expectedOutput": "false\nfalse\nfalse\ntrue\ntrue\ntrue\nfalse\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"(ant|bat|cat)X\\\\1\")));"
+  },
+  {
+    "id": 42,
+    "question": "Write a regular expression that matches strings that begin with three alphabetic letters (upper or lower case), contains any number of alphabetic letters in the middle (upper or lower case) and ends with the same three letters the string started with, but in reverse order. For example abcdummyletterscba is a valid string.",
+    "input": "List<String> inputs = Arrays.asList(\"abcdummyletterscba\", \"TimAlexmiT\", \"catdogtac\", \"catdogcat\");",
+    "expectedOutput": "true\ntrue\ntrue\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"([a-zA-Z])([a-zA-Z])([a-zA-Z])[a-zA-Z]*\\\\3\\\\2\\\\1\")));"
+  },
+  {
+    "id": 43,
+    "question": "Write a regular expression that matches strings that begin with three alphabetic letters (upper or lower case), contains any number of alphabetic letters in the middle (upper or lower case) and ends with the same three letters the string started with. For example abcdummylettersabc is a valid string.",
+    "input": "List<String> inputs = Arrays.asList(\"abcdummylettersabc\", \"TimAlexTim\", \"abcdummyletterscba\", \"TimAlexmiT\", \"catdogtac\", \"catdogcat\");",
+    "expectedOutput": "true\ntrue\nfalse\nfalse\nfalse\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"([a-zA-Z])([a-zA-Z])([a-zA-Z])[a-zA-Z]*\\\\1\\\\2\\\\3\")));"
+  },
+  {
+    "id": 44,
+    "question": "Write a regular expression without using a positive look-ahead to validate the ISBN of a book. A valid ISBN format is ISBN-3digits-4digits.",
+    "input": "List<String> inputs = Arrays.asList(\"ISBN-374-5452\", \"ISNB-374-5697\", \"3743-347-5443\", \"ABCD-123-4567\");",
+    "expectedOutput": "true\nfalse\nfalse\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"ISBN-\\\\d{3}-\\\\d{4}\"))); \n\n What is the benefit of Lookaheads\nSuppose I want to check for the validity of a book's ISBN. The ISBN needs to conform to the following format:\n\nISBN-\\\\d{3}-\\\\d{4}\n\nIn this regex, we do not have any lookahead. It means for any given string, compiler will execute the entire regex on the given string even if it fails on the start of the string i.e. if the string doesn't start with ISBN, the system will still run the entire regex. This is the performance advantage that Lookaheads bring to the table.\n\nLets rewrite the same regex with a lookahead to gain the performance advantage:\n\n(?=ISBN)\\\\w{4}\\\\-\\\\d{3}-\\\\d{4}\n\nIn the above pattern, I have used the positive look head technique for the string \"ISBN\". The positive look ahead pattern must be placed in a group. It starts with the question mark (?), followed by equal sign (=), and followed by our desired pattern that we want to apply a positive look-ahead in.\n\nIn the above regex, the system will first check if the first 4 letters are literal \"ISBN\" or not. If it does, then it will run the rest of the regex otherwise it will stop the processing of regex right at the beginning of the string. Imagine you have to process large number of long string. In that case, terminating the process right at the beginning will give you fast processing time."
+  },
+  {
+    "id": 45,
+    "question": "Write a regular expression using a positive look-ahead to validate the ISBN of a book. A valid ISBN format is ISBN-3digits-4digits.",
+    "input": "List<String> inputs = Arrays.asList(\"ISBN-374-5452\", \"ISNB-374-5697\", \"3743-347-5443\", \"ABCD-123-4567\");",
+    "expectedOutput": "true\nfalse\nfalse\nfalse",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"(?=ISBN)\\\\w{4}\\\\-\\\\d{3}-\\\\d{4}\"))); \n\n What is the benefit of Lookaheads\nSuppose I want to check for the validity of a book's ISBN. The ISBN needs to conform to the following format:\n\nISBN-\\\\d{3}-\\\\d{4}\n\nIn this regex, we do not have any lookahead. It means for any given string, compiler will execute the entire regex on the given string even if it fails on the start of the string i.e. if the string doesn't start with ISBN, the system will still run the entire regex. This is the performance advantage that Lookaheads bring to the table.\n\nLets rewrite the same regex with a lookahead to gain the performance advantage:\n\n(?=ISBN)\\\\w{4}\\\\-\\\\d{3}-\\\\d{4}\n\nIn the above pattern, I have used the positive look head technique for the string \"ISBN\". The positive look ahead pattern must be placed in a group. It starts with the question mark (?), followed by equal sign (=), and followed by our desired pattern that we want to apply a positive look-ahead in.\n\nIn the above regex, the system will first check if the first 4 letters are literal \"ISBN\" or not. If it does, then it will run the rest of the regex otherwise it will stop the processing of regex right at the beginning of the string. Imagine you have to process large number of long string. In that case, terminating the process right at the beginning will give you fast processing time."
+  },
+  {
+    "id": 46,
+    "question": "Write a regular expression to validate the password. The password must follow the below policy:\n\n1. at least 4 characters\n2. max of 8 characters\n3. at least 1 digit from 0 to 9\n4. at least 1 upper case letter",
+    "input": "List<String> inputs = Arrays.asList(\"Abc9\", \"abcaA9bc\", \"Ab9\", \"9Pqrstuv9323\", \"AA92342SDFS234@#$\", \"8aA9\", \"98AAbc39\");",
+    "expectedOutput": "true\ntrue\nfalse\nfalse\nfalse\ntrue\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"^(?=.*\\\\d+.*)(?=.*[A-Z]+.*)\\\\w{4,8}$\"))); \n\nThe pattern includes 2 positive look ahead patterns:\n\n1. (?=.*\\d+.*): this look ahead pattern requires the password must contain at least one digit from 0 to 9.\n2. (?=.*[A-Z]+.*): this look ahead requires the password must contain at least one upper case letter from A to Z.\n3. And to restrict the min and max number of characters, we use the familiar pattern \\w{4,8}\n\nAlso, note that it is mandatory to apply the caret sign (^) at the beginning, and the dollar sign ($) at the end of the pattern. This is to make sure the entire input password must be matched with the pattern."
+  },
+  {
+    "id": 47,
+    "question": "A string is only valid if it contains blue but not red. Write a regular expression to validate the given strings as per this rule.",
+    "input": "List<String> inputs = Arrays.asList(\"I contain only blue.\", \"I do not contain blue\", \"I contain red.\", \"I cotain both blue and red\", \"blue\", \"red\", \"red and blue\", \"blue blue\", \"red blue red\", \"red blue Red\", \"Red blue\", \"I am Blue with capital B\");",
+    "expectedOutput": "true\ntrue\nfalse\nfalse\ntrue\nfalse\nfalse\ntrue\nfalse\nfalse\nfalse\ntrue",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\"(?!.*(?i)red).*(?i)blue.*\"))); \n\nNote that ?i is used to make the matching case-insensitive. If we don't use i, it will only test for lower case and a string with Red as capital R will be accepted which we dont want."
+  },
+  {
     "id": 48,
     "question": "Write a regular expression to not accept the string if it has a letter \"a\" followed by letter \"b\"",
     "input": "List<String> inputs = Arrays.asList(\"This is aburn\", \"This is ashburn\");",
     "expectedOutput": "false\ntrue",
     "solution": "inputs.stream().forEach(i -> System.out.println(i.matches(\".*a(?!b).*\"))); "
+  },
+  {
+    "id": 49,
+    "question": "Replace all whitespaces between a word and period OR between a word and comma using Regular Expression. For example I am a doctor . has a whitespace between doctor and period so it should be I am a doctor. (no space between doctor and period.",
+    "input": "List<String> inputs = Arrays.asList(\"I have a space before . Basketball , baseball games . Cricket , Football .\", \"Coding , programming , and mathematics, are cool subjects .\");",
+    "expectedOutput": "I have a space before. Basketball, baseball games. Cricket, Football.\nCoding, programming, and mathematics, are cool subjects.",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.replaceAll(\"(\\\\w)(\\\\s+)([\\\\.,])\", \"$1$3\")));\n\nAssume you want to replace all whitespace between a letter followed by a point or a comma.\n\nThis would involve that the point or the comma is part of the pattern. Still it should be included in the result.\n\nRemoves whitespace between a word character and . or , \n\nReplacement is referred using $ sign where $1 represents first group of regex which is (\\w) and $3 represents 3rd group of regex which is ([\\.,])"
+  },
+  {
+    "id": 50,
+    "question": "Remove all duplicate words from the given string using regular expression.",
+    "input": "List<String> inputs = Arrays.asList(\"Good bye bye world world\", \"Alex went went to to his home\", \"Hello hello world world\", \"hello Hello hello hello\");",
+    "expectedOutput": "Good bye world\nAlex went to his home\nHello world\nhello",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.replaceAll(\"\\\\b(\\\\w+)(?i:\\\\W+\\\\1\\\\b)+\", \"$1\")));\n\nThe details of the above regular expression can be understood as:\n\n“\\b”: A word boundary. Boundaries are needed for special cases. For example, in “My thesis is great”, “is” wont be matched twice.\n\n“\\w+” A word character: [a-zA-Z_0-9]\n\n(?:\\W+\\1\\b)+ : This part is a non-capturing group (denoted by (?:…)). It’s used to group together the repeated words. Let’s break it down further:\n\n“\\W+” : This matches one or more non-word characters (anything that is not a word character).\n\n“\\1:” This is a back reference to the first capturing group (\\w+). It ensures that the same word that was captured earlier is repeated. The \\1 references the exact text captured by the first capturing group.\n\n“\\b” Another word boundary anchor to ensure that the repeated word is a whole word.\n\n“+” This quantifier ensures that the non-capturing group (?:\\W+\\1\\b) matches one or more times, effectively matching one or more repeated words."
+  },
+  {
+    "id": 51,
+    "question": "Write a regular expression that extracts the text from inside the tag <title>. For example <title I am a title> should return I am a title",
+    "input": "List<String> inputs = Arrays.asList(\"<title I am middle>\", \"<title I am @#$4242 another middle 234@#$2>\");",
+    "expectedOutput": "I am middle\nI am @#$4242 another middle 234@#$2",
+    "solution": "inputs.stream().forEach(i -> System.out.println(i.replaceAll(\"(?i)(&lt;title )(.*)(>)\", \"$2\")));"
   }
 ]
