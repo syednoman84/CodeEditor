@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "question": "Implement Dynamic Array. You need to provide the implementation of all methods used in the main method of the given question.",
+    "input": "DynamicArray",
+    "expectedOutput": "isEmpty:true\n[null, null, null, null, null, null, null, null, null, null]\n[A, B, C, null, null, null, null, null, null, null]\n[X, A, B, C, null, null, Y, null, null, null]\n6\n-1\nisEmpty: false\nsize: 4\ncapacity: 10\n[X, A, C, null, null, null, Y, null, null, null]\nGrow Test:\nsize: 3\ncapacity: 3\n[A, B, C]\nsize: 6\ncapacity: 6\n[A, B, C, D, E, F]",
+    "solution": ""
+  }
+]

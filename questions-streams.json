@@ -114,7 +114,7 @@
   {
     "id": 17,
     "question": "Return the sum of all values in the given Integer[] array using streams.",
-    "input": "int[] array = {1, 2, 3, 4, 5};",
+    "input": "Integer[] array = {1, 2, 3, 4, 5};",
     "expectedOutput": "15",
     "solution": "System.out.println(Arrays.stream(array).sum());"
   },
@@ -211,7 +211,7 @@
   },
   {
     "id": 31,
-    "question": "Return a String generated from the values of given array list, concatenated with a command and space. Also, each value should be converted to upper case",
+    "question": "Return a String generated from the values of given array list, concatenated with a comma and space. Also, each value should be converted to upper case",
     "input": "List<String> G7 = Arrays.asList(\"USA\", \"Japan\", \"France\", \"Germany\", \"Italy\", \"U.K.\", \"Canada\");",
     "expectedOutput": "USA, JAPAN, FRANCE, GERMANY, ITALY, U.K., CANADA",
     "solution": "String G7Countries = G7.stream().map(x -> x.toUpperCase()).collect(Collectors.joining(\", \"));\nSystem.out.println(G7Countries);"
@@ -225,7 +225,7 @@
   },
   {
     "id": 33,
-    "question": "Find the index of value = 6 in the given Array List using streams. You are not allowed to use any loops.",
+    "question": "Find the first index of value = 6 in the given Array List using streams. You are not allowed to use any loops.",
     "input": "int[] ints = {2, 6, 1, 22, 4, -6, 6, 30, 6, 9};",
     "expectedOutput": "1",
     "solution": "int index = IntStream.range(0, ints.length).filter(i -> ints[i] == 6).findFirst().orElse(-1);\nSystem.out.println(index);"
@@ -246,7 +246,7 @@
   },
   {
     "id": 36,
-    "question": "Find all the indices of value = 6 in the given Array List using streams and return as an Integer[] array. You are not allowed to use any loops.",
+    "question": "Find all the indices of value = 6 in the given Array List using streams and return as an List. You are not allowed to use any loops.",
     "input": "int[] ints = {2, 6, 1, 22, 4, -6, 6, 30, 6, 9};",
     "expectedOutput": "[1, 6, 8]",
     "solution": "List<Integer> indices = IntStream.range(0, ints.length).filter(i -> ints[i] == 6).boxed().collect(Collectors.toList());\nSystem.out.println(indices);"

@@ -22,7 +22,13 @@ app.post("/get-all-questions", function (req, res) {
   var fs = require("fs");
   const regexfilePath = "./questions-regex.json";
   const streamsfilePath = "./questions-streams.json";
-  filePath = req.body.filePath == "streams" ? streamsfilePath : regexfilePath;
+  const implementationsfilePath = "./questions-implementations.json";
+  filePath =
+    req.body.filePath == "streams"
+      ? streamsfilePath
+      : req.body.filePath == "regex"
+      ? regexfilePath
+      : implementationsfilePath;
 
   // reads the questions.json file and send back
   res.send(JSON.parse(fs.readFileSync(filePath)));

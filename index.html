@@ -249,8 +249,72 @@ public class Main {
         print(object.toString());
     }
 }
+`
 
+var implementDynamicArray = 
+`
+public class Main {
+    public static void main(String[] args) {
 
+        DynamicArray dynamicArray = new DynamicArray();
+
+        System.out.println("isEmpty:" + dynamicArray.isEmpty());
+        System.out.println(dynamicArray);
+
+        dynamicArray.add("A");
+        dynamicArray.add("B");
+        dynamicArray.add("C");
+        System.out.println(dynamicArray);
+
+        dynamicArray.insert(0, "X");
+        dynamicArray.insert(6, "Y");
+        System.out.println(dynamicArray);
+
+        System.out.println(dynamicArray.search("Y"));
+        System.out.println(dynamicArray.search("popcorn"));
+
+        dynamicArray.delete("B");
+
+        System.out.println("isEmpty: " + dynamicArray.isEmpty());
+        System.out.println("size: " + dynamicArray.size);
+        System.out.println("capacity: " + dynamicArray.capacity);
+        System.out.println(dynamicArray);
+
+        System.out.println("Grow Test:");
+
+        DynamicArray growArray = new DynamicArray(3);
+        growArray.add("A");
+        growArray.add("B");
+        growArray.add("C");
+        System.out.println("size: " + growArray.size);
+        System.out.println("capacity: " + growArray.capacity);
+        System.out.println(growArray);
+        growArray.add("D");
+        growArray.add("E");
+        growArray.add("F");
+        System.out.println("size: " + growArray.size);
+        System.out.println("capacity: " + growArray.capacity);
+        System.out.println(growArray);
+    }
+}
+
+/*
+    Custom class that supports following functionalities:
+    1. Creation of an array without any user-provided size
+    2. Creation of an array with user-provided size
+    3. Add element to the end of the array
+    4. Insert element to the desired index
+    5. Delete element from the array by searching it in the array
+    6. Search element and return its index
+    7. Grow array  by twice the size if array is full
+    8. Shrink array by half the size if array is empty one-third of capacity
+    9. isEmpty to return true if array is empty otherwise false
+    10. toString method to return the array elements in your own custom format
+ */
+
+ class DynamicArray {
+
+}
 `
 
     var totalQuestions = document.getElementById("totalQuestions")
@@ -282,13 +346,17 @@ public class Main {
     editor.setSize(0.7 * width, "900")
 
     fp = {
-             filePath: "streams"
+        filePath: "streams"
     }
 
     //fp = {
     //        filePath: "regex"
     //}
     
+    //fp = {
+      //       filePath: "implementations"
+    //}
+
     window.onload = async () => {
         let promiseData = await promiseOfFetch;
         questions = promiseData;
@@ -327,8 +395,10 @@ public class Main {
         
         if(fp.filePath == "streams" && question.id >= 41 && question.id <=55){
             editor.getDoc().setValue(animalClassTemplate);    
-        } else{
+        } else if(fp.filePath == "regex"){
             editor.getDoc().setValue(editorTemplateStart + "\t" + question.input + editorTemplateEnd);
+        } else if(fp.filePath == "implementations" && question.input=="DynamicArray"){
+            editor.getDoc().setValue(implementDynamicArray);
         }
         
         expectedOutput.value = question.expectedOutput;
