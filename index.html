@@ -393,9 +393,9 @@ public class Main {
 
         qText.innerHTML = question.question;
         
-        if(fp.filePath == "streams" && question.id >= 41 && question.id <=55){
+        if(fp.filePath == "streams" && question.id >= 2 && question.id <=16){
             editor.getDoc().setValue(animalClassTemplate);    
-        } else if(fp.filePath == "regex"){
+        } else if(fp.filePath == "streams" || fp.filePath == "regex"){
             editor.getDoc().setValue(editorTemplateStart + "\t" + question.input + editorTemplateEnd);
         } else if(fp.filePath == "implementations" && question.input=="DynamicArray"){
             editor.getDoc().setValue(implementDynamicArray);
@@ -423,7 +423,7 @@ public class Main {
         } else {
             qText.innerHTML = counter + 1 + ". " + questions[counter].question;
             
-            if(fp.filePath == "streams" && questions[counter].id >= 41 && questions[counter].id <=55){
+            if(fp.filePath == "streams" && questions[counter].id >= 2 && questions[counter].id <=16){
                 editor.getDoc().setValue(animalClassTemplate);    
             } else{
                 editor.getDoc().setValue(editorTemplateStart + "\t" + questions[counter].input + editorTemplateEnd);
