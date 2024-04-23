@@ -446,5 +446,26 @@
     "input": "List<String> numbtoStrList = new ArrayList<>();\n\n\t\tnumbtoStrList.add(\"Six\");\n\t\tnumbtoStrList.add(\"Seven\");\n\t\tnumbtoStrList.add(\"Three\");\n\t\tnumbtoStrList.add(\"Two\");\n\t\tnumbtoStrList.add(\"Five\");",
     "expectedOutput": "{0=Six, 1=Seven, 2=Three, 3=Two, 4=Five}",
     "solution": "Map<Integer, String> map_of_index = IntStream.range(0, numbtoStrList.size()).boxed().collect(Collectors.toMap(i -> i, j -> numbtoStrList.get(j)));\nSystem.out.println(map_of_index);"
+  },
+  {
+    "id": 65,
+    "question": "The classic word-count algorithm: given an array of strings, return a Map<String, Integer> with a key for each different string, with the value the number of times that string appears in the array. For example, array [\"a\", \"b\", \"a\", \"c\", \"b\"] will output → {\"a\": 2, \"b\": 2, \"c\": 1}",
+    "input": "String[] strings = {\"a\", \"b\", \"a\", \"c\", \"b\"};",
+    "expectedOutput": "{a=2, b=2, c=1}",
+    "solution": "Map<String, Integer> map = Arrays.stream(strings).collect(Collectors.groupingBy(s -> s, Collectors.reducing(0, t -> 1, Integer::sum)));\nSystem.out.println(map);"
+  },
+  {
+    "id": 66,
+    "question": "Given an array of strings, return a Map<String, Integer> containing a key for every different string in the array, and the value is that string's length. For example array [\"this\", \"and\", \"that\", \"and\"]) will produce {\"that\": 4, \"and\": 3, \"this\": 4}",
+    "input": "String[] strings2 = {\"this\", \"and\", \"that\", \"and\"};",
+    "expectedOutput": "{that=4, and=3, this=4}",
+    "solution": "Map<String, Integer> map2 = Arrays.stream(strings2).distinct().collect(Collectors.toMap(s -> s, String::length));\nSystem.out.println(map2);"
+  },
+  {
+    "id": 67,
+    "question": "Given an array of non-empty strings, create and return a Map<String, String> as follows: for each string add its first character as a key with its last character as the value. Note in this example, we are using 3rd parameter to toMap so that it doesn't try to add duplicate keys. For example array [\"man\", \"moon\", \"good\", \"night\"]) will produce {\"g\": \"d\", \"m\": \"n\", \"n\": \"t\"}",
+    "input": "String[] strings3 = {\"man\", \"moon\", \"good\", \"night\"};",
+    "expectedOutput": "{g=d, m=n, n=t}",
+    "solution": "Map<String, String> map3 = Arrays.stream(strings3).collect(Collectors.toMap(s -> s.substring(0, 1), t -> t.substring(t.length() - 1), (p, q) -> q));\n System.out.println(map3);"
   }
 ]
