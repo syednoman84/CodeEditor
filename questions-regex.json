@@ -355,5 +355,12 @@
     "input": "List<String> inputs = Arrays.asList(\"<title I am middle>\", \"<title I am @#$4242 another middle 234@#$2>\");",
     "expectedOutput": "I am middle\nI am @#$4242 another middle 234@#$2",
     "solution": "inputs.stream().forEach(i -> System.out.println(i.replaceAll(\"(?i)(&lt;title )(.*)(>)\", \"$2\")));"
+  },
+  {
+    "id": 52,
+    "question": "Using regex, split the given string every n given characters",
+    "input": "String str = \"abcdefgh123456\";\nint n = 3;",
+    "expectedOutput": "[abc, def, gh1, 234, 56]",
+    "solution": "String[] results = str.split(\"(?<=\\\\G.{\" + n + \"})\");\nSystem.out.println(Arrays.toString(results));"
   }
 ]
